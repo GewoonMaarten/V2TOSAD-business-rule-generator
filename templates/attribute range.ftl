@@ -1,0 +1,1 @@
+l_passed := ${attribute} ${operator} ${value[minimum]} and ${value[maximum]}

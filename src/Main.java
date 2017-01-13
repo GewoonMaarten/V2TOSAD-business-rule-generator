@@ -1,4 +1,4 @@
-import domain.DatabaseConnection;
+import data.DatabaseConnection;
 
 public class Main {
     public static void main(String[] args){
