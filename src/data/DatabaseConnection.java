@@ -1,29 +1,25 @@
 package data;
 
 import java.sql.* ;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.Executor;
 
 /**
  * Created by Maarten de Klerk on 13-1-2017.
  */
 public class DatabaseConnection {
+    private String url;
     private String username;
     private String password;
-    private String url;
-    private Connection conn;
 
-    public DatabaseConnection(String username, String password, String url) {
+    public DatabaseConnection(String url, String username, String password) {
+        this.url = url;
         this.username = username;
         this.password = password;
-        this.url      = url;
-        try{
-            conn = DriverManager.getConnection(url, username, password);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-    public Connection getConn(){
-        return conn;
     }
 
+    public Connection open() throws SQLException{
+        return DriverManager.getConnection(this.url, this.username, this.password);
+    }
 }
