@@ -1,5 +1,5 @@
 create or replace trigger ${name}
-    before delete or inert or update
+    before delete or insert or update
     on ${table}
     for each row
 declare
