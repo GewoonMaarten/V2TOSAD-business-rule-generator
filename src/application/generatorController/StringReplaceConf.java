@@ -9,11 +9,12 @@ import java.io.File;
  * Created by Maarten de Klerk on 13-1-2017.
  */
 public class StringReplaceConf {
+    private Configuration cfg;
     private static StringReplaceConf instance = null;
 
     private StringReplaceConf() {
         try {
-            Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
+            cfg = new Configuration(Configuration.VERSION_2_3_25);
             cfg.setDirectoryForTemplateLoading(new File("./templates/"));
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
@@ -29,4 +30,6 @@ public class StringReplaceConf {
         }
         return instance;
     }
+
+    public Configuration getCfg(){return cfg;}
 }

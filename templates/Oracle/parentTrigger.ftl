@@ -15,8 +15,8 @@ begin
             l_open := 'DEL';
     end case;
 
-    <#list businessRules as businessRule>
-        ${businessRule.generatedTrigger}
+    <#list generatedTriggers as generatedTrigger>
+        ${generatedTrigger}
     </#list>
 
 end ${name}
