@@ -19,4 +19,4 @@ begin
         ${generatedTrigger}
     </#list>
 
-end ${name}
+end ${name};
