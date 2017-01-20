@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!--
+            De database connectie configuratie zal dynamic gegeneerd moeten worden zodat het systeem verschillende
+            type databases ondersteund. De configuratie informatie zal beschikbaar zijn in de  TargetDatabase Class.
+            Dit kan medemogelijk gemaakt door met behulp van deze documentatie:
+                https://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/session-configuration.html
+        -->
+        <property name="hibernate.dialect"></property>
+        <property name="hibernate.connection.driver_class"></property>
+
+        <property name="hibernate.connection.url"></property>
+        <property name="hibernate.connection.username"></property>
+        <property name="hibernate.connection.password"></property>
+
+        <!-- xml mapping -->
+
+    </session-factory>
+</hibernate-configuration>
