@@ -2,6 +2,7 @@ package domain.defineDomain;
 
 import data.definePersistency.facade.DefinePersistency;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BusinessRuleBuilder {
@@ -35,7 +36,13 @@ public class BusinessRuleBuilder {
 
         businessruleType.setTargetDatabaseType(targetDatabaseType);
 
+        ArrayList<HashMap<String,Object>> attributesDetails = DefinePersistency.getInstance().getBusinessRuleAttributesDetails(businessRuleID);
+        for(HashMap<String, Object> map : attributesDetails)
+        {
+            Attribute attribute = new Attribute(map);
+            businessRule.addAttribue(attribute);
+        }
 
-
+        //TODO figure the fuck out how template shit works
     }
 }

@@ -1,5 +1,6 @@
 package domain.defineDomain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -11,6 +12,7 @@ public class BusinessRule {
     private HashMap<String, Object> values;
     private String generatedTrigger;
     private BusinessruleType ruleType;
+    private ArrayList<Attribute> attributes;
 
     public BusinessRule(int id, String name, HashMap<String, Object> values) {
         this.id = id;
@@ -37,5 +39,10 @@ public class BusinessRule {
 
     public void setRuleType(BusinessruleType ruleType) {
         this.ruleType = ruleType;
+    }
+
+    public void addAttribue(Attribute attribute)
+    {
+        attributes.add(attribute);
     }
 }
