@@ -10,6 +10,13 @@ public class BusinessRule {
     private String name;
     private HashMap<String, Object> values;
     private String generatedTrigger;
+    private BusinessruleType ruleType;
+
+    public BusinessRule(int id, String name, HashMap<String, Object> values) {
+        this.id = id;
+        this.name = name;
+        this.values = values;
+    }
 
     public String getGeneratedTrigger() {
         return generatedTrigger;
@@ -22,5 +29,13 @@ public class BusinessRule {
 
     public void setGeneratedTrigger(String generatedTrigger){
         this.generatedTrigger = generatedTrigger;
+    }
+
+    public BusinessruleType getRuleType() {
+        return ruleType;
+    }
+
+    public void setRuleType(BusinessruleType ruleType) {
+        this.ruleType = ruleType;
     }
 }

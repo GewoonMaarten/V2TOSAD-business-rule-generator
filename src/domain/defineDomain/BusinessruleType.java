@@ -11,6 +11,8 @@ public class BusinessruleType {
     private String example;
     private Category category;
 
+    private TargetDatabaseType targetDatabaseType;
+
     public BusinessruleType(int id, String name, String code, String description, String example, Category category) {
         this.id = id;
         this.name = name;
@@ -26,5 +28,13 @@ public class BusinessruleType {
         this.code = code;
         this.description = description;
         this.category = category;
+    }
+
+    public TargetDatabaseType getTargetDatabaseType() {
+        return targetDatabaseType;
+    }
+
+    public void setTargetDatabaseType(TargetDatabaseType targetDatabaseType) {
+        this.targetDatabaseType = targetDatabaseType;
     }
 }
