@@ -1,6 +1,6 @@
-package domain.defineDomain.facade;
+package main.java.domain.defineDomain.facade;
 
-import domain.defineDomain.BusinessRule;
+import main.java.domain.defineDomain.BusinessRule;
 
 import java.util.ArrayList;
 

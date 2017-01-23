@@ -1,4 +1,4 @@
-package application.generatorController;
+package main.java.application.generatorController;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;

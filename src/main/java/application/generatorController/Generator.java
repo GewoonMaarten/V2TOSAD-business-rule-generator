@@ -1,6 +1,5 @@
-package application.generatorController;
+package main.java.application.generatorController;
 
-import domain.defineDomain.BusinessRule;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Generator {
     private ArrayList<String> generatedTriggers;
