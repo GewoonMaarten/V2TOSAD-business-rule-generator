@@ -1,11 +1,8 @@
-package main.java.domain.defineDomain;
+package domain.defineDomain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Maarten de Klerk on 13-1-2017.
- */
 public class BusinessRule {
     private int id;
     private String name;

@@ -1,6 +1,4 @@
-package main.java.data.definePersistency.facade;
-
-import main.java.domain.defineDomain.BusinessRule;
+package data.definePersistency.facade;
 
 import java.util.ArrayList;
 import java.util.HashMap;

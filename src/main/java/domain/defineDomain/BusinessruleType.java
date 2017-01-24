@@ -1,8 +1,5 @@
-package main.java.domain.defineDomain;
+package domain.defineDomain;
 
-/**
- * Created by Maarten de Klerk on 13-1-2017.
- */
 public class BusinessruleType {
     private int id;
     private String name;

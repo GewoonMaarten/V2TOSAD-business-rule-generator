@@ -1,6 +1,4 @@
-package main.java;
-
-import main.java.application.generatorController.Generator;
+import application.generatorController.Generator;
 
 import java.util.HashMap;
 

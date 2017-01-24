@@ -1,12 +1,12 @@
-package main.java.application.generatorController;
+package application.generatorController;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import java.io.IOException;
-import main.java.domain.defineDomain.BusinessRule;
-import main.java.domain.defineDomain.facade.DefineDomainService;
-import main.java.domain.generateDomain.Trigger;
-import main.java.domain.generateDomain.facade.GenerateDomainService;
+import domain.defineDomain.BusinessRule;
+import domain.defineDomain.facade.DefineDomainService;
+import domain.generateDomain.Trigger;
+import domain.generateDomain.facade.GenerateDomainService;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -35,7 +35,7 @@ public class Generator {
         try {
             Template freeMarkerTemplate;
             StringWriter sw = new StringWriter();
-            main.java.domain.defineDomain.Template codeTemplate;
+            domain.defineDomain.Template codeTemplate;
             codeTemplate = DefineDomainService.getInstance().getTemplate(businessRule, businessRule.getTargetDatabase().getTargetDatabaseType().getId());
             freeMarkerTemplate = new Template("test", new StringReader(codeTemplate.getCode()), StringReplaceConf.getInstance().getCfg());
             freeMarkerTemplate.process(businessRule.getValues(), sw);

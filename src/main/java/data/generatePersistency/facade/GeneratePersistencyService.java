@@ -1,7 +1,6 @@
-package main.java.data.generatePersistency.facade;
+package data.generatePersistency.facade;
 
-import main.java.domain.generateDomain.Trigger;
-import main.java.domain.generateDomain.facade.GenerateDomainService;
+import domain.generateDomain.Trigger;
 
 public class GeneratePersistencyService {
     private static GeneratePersistencyService instance = null;

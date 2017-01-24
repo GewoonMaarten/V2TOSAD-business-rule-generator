@@ -1,13 +1,5 @@
-package main.java.data.generatePersistency.dao;
+package data.generatePersistency.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
-/**
- * Created by emile on 23-1-2017.
- */
 public class TriggerDAO {
 
 //    public ArrayList<ArrayList> getTestRecordsFromTargetDatabase()

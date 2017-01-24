@@ -1,10 +1,7 @@
-package main.java.domain.generateDomain;
+package domain.generateDomain;
 
-import main.java.domain.defineDomain.TargetDatabaseType;
+import domain.defineDomain.TargetDatabaseType;
 
-/**
- * Created by Maarten de Klerk on 13-1-2017.
- */
 public class Trigger {
     private String code;
     private TargetDatabaseType targetDatabaseType;

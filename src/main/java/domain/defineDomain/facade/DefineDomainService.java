@@ -1,14 +1,13 @@
-package main.java.domain.defineDomain.facade;
+package domain.defineDomain.facade;
 
-import main.java.data.definePersistency.facade.DefinePersistencyService;
-import main.java.domain.defineDomain.*;
+import data.definePersistency.facade.DefinePersistencyService;
+import domain.defineDomain.BusinessRule;
+import domain.defineDomain.BusinessRuleBuilder;
+import domain.defineDomain.Template;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Maarten de Klerk on 18-1-2017.
- */
 public class DefineDomainService {
     private static DefineDomainService instance = null;
 

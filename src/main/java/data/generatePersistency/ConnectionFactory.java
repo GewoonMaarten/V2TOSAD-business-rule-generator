@@ -1,6 +1,8 @@
-package main.java.data.generatePersistency;
+package data.generatePersistency;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConnectionFactory {
     //bron: http://theopentutorials.com/tutorials/java/jdbc/jdbc-examples-introduction/

@@ -1,13 +1,10 @@
-package main.java.application.generatorController;
+package application.generatorController;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 
 import java.io.File;
 
-/**
- * Created by Maarten de Klerk on 13-1-2017.
- */
 public class StringReplaceConf {
     private Configuration cfg;
     private static StringReplaceConf instance = null;

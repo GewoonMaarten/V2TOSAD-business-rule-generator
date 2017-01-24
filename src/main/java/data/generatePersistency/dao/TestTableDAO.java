@@ -1,8 +1,8 @@
-package main.java.data.generatePersistency.dao;
+package data.generatePersistency.dao;
 
-import main.java.data.DbUtil;
-import main.java.data.generatePersistency.ConnectionFactory;
-import main.java.domain.generateDomain.TestTable;
+import data.DbUtil;
+import data.generatePersistency.ConnectionFactory;
+import domain.generateDomain.TestTable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

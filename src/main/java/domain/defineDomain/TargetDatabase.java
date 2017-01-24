@@ -1,12 +1,9 @@
-package main.java.domain.defineDomain;
+package domain.defineDomain;
 
-import main.java.data.definePersistency.facade.DefinePersistencyService;
+import data.definePersistency.facade.DefinePersistencyService;
 
 import java.util.HashMap;
 
-/**
- * Created by Maarten de Klerk on 17-1-2017.
- */
 public class TargetDatabase {
     private int id;
     private TargetDatabaseType type;

@@ -1,7 +1,6 @@
-package main.java.application.generatorController;
+package application.generatorController;
 
-import main.java.data.generatePersistency.facade.GeneratePersistencyService;
-import main.java.domain.generateDomain.TestTable;
+import data.generatePersistency.facade.GeneratePersistencyService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

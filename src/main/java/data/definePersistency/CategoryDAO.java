@@ -1,4 +1,4 @@
-package main.java.data.definePersistency;
+package data.definePersistency;
 
 public class CategoryDAO {
 

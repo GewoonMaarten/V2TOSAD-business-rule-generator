@@ -1,6 +1,6 @@
-package main.java.domain.defineDomain;
+package domain.defineDomain;
 
-import main.java.data.definePersistency.facade.DefinePersistencyService;
+import data.definePersistency.facade.DefinePersistencyService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
