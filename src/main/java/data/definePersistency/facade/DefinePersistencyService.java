@@ -1,4 +1,4 @@
-package main.java.data.definePersistency.facade;
+package data.definePersistency.facade;
 
 public class DefinePersistencyService {
 }
