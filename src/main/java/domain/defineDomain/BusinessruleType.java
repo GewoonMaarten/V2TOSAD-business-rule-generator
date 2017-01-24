@@ -1,4 +1,4 @@
-package domain.defineDomain;
+package main.java.domain.defineDomain;
 
 /**
  * Created by Maarten de Klerk on 13-1-2017.

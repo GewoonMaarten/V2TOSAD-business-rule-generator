@@ -1,6 +1,6 @@
-package domain.defineDomain;
+package main.java.domain.defineDomain;
 
-import data.definePersistency.facade.DefinePersistency;
+import main.java.data.definePersistency.facade.DefinePersistency;
 
 import java.util.HashMap;
 
