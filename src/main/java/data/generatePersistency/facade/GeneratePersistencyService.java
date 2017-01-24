@@ -1,4 +1,4 @@
-package main.java.data.generatePersistency.facade;
+package data.generatePersistency.facade;
 
 public class GeneratePersistencyService {
 }

@@ -1,14 +1,35 @@
-package main.java.domain.defineDomain;
+package domain.defineDomain;
 
-/**
- * Created by Maarten de Klerk on 17-1-2017.
- */
 public class Category {
-    private int id;
+    private int categoryID;
     private String name;
 
-    public Category(int id, String name) {
-        this.id = id;
+    public Category(int categoryID, String name) {
+        this.categoryID = categoryID;
         this.name = name;
+    }
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryID=" + categoryID +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

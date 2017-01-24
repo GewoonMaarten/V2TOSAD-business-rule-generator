@@ -1,16 +1,57 @@
-package main.java.domain.defineDomain;
+package domain.defineDomain;
 
-/**
- * Created by Maarten de Klerk on 17-1-2017.
- */
 public class Template {
+    private int templateID;
+    private String templateCode;
     private BusinessruleType businessruleType;
-    private TargetDatabase targetDatabase;
-    private String path;
+    private TargetDatabaseType targetDatabaseType;
 
-    public Template(BusinessruleType businessruleType, TargetDatabase targetDatabase, String path) {
+    public Template(int templateID, String templateCode, BusinessruleType businessruleType, TargetDatabaseType targetDatabaseType) {
+        this.templateID = templateID;
+        this.templateCode = templateCode;
         this.businessruleType = businessruleType;
-        this.targetDatabase = targetDatabase;
-        this.path = path;
+        this.targetDatabaseType = targetDatabaseType;
+    }
+
+    public int getTemplateID() {
+        return templateID;
+    }
+
+    public void setTemplateID(int templateID) {
+        this.templateID = templateID;
+    }
+
+    public String getTemplateCode() {
+        return templateCode;
+    }
+
+    public void setTemplateCode(String templateCode) {
+        this.templateCode = templateCode;
+    }
+
+    public BusinessruleType getBusinessruleType() {
+        return businessruleType;
+    }
+
+    public void setBusinessruleType(BusinessruleType businessruleType) {
+        this.businessruleType = businessruleType;
+    }
+
+    public TargetDatabaseType getTargetDatabaseType() {
+        return targetDatabaseType;
+    }
+
+    public void setTargetDatabaseType(TargetDatabaseType targetDatabaseType) {
+        this.targetDatabaseType = targetDatabaseType;
+    }
+
+    @Override
+    public String toString() {
+        return "Template{" +
+                "templateID=" + templateID +
+                ", templateCode='" + templateCode + '\'' +
+                ", businessruleType=" + businessruleType +
+                ", targetDatabaseType=" + targetDatabaseType +
+                '}';
     }
 }
