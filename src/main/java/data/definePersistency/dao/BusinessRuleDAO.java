@@ -1,4 +1,4 @@
-package main.java.data.definePersistency;
+package data.definePersistency.dao;
 
 /**
  * Created by emile on 23-1-2017.

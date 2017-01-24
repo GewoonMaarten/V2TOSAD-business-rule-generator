@@ -1,5 +1,8 @@
 package application.generatorController;
 
+import data.generatePersistency.dao.TestTableDAO;
+import domain.generateDomain.TestTable;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,10 +16,11 @@ public class RESTService {
     // Uncomment for get body, function param should be "String msg"
     // @Consumes("text/plain")
     public Response getMsg(@PathParam("businessRuleID") String businessRuleID) {
+        TestTableDAO dao = new TestTableDAO();
 
-        String output = "Jersey say : " + businessRuleID;
+        TestTable testTable = dao.getTestTable(1);
 
-        System.out.println(output);
+        String output = testTable.toString();
 
         return Response.status(200).entity(output).build();
 
