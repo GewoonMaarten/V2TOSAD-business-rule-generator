@@ -18,9 +18,11 @@ public class RESTService {
     public Response getMsg(@PathParam("businessRuleID") String businessRuleID) {
         GeneratePersistencyService gps = new GeneratePersistencyService();
 
-        TestTable testTable = gps.getTestTableData(1);
+//        TestTable testTable = gps.getTestTableData(1);
+//
+//        String output = testTable.toString();
 
-        String output = testTable.toString();
+        String output = "hoi";
 
         return Response.status(200).entity(output).build();
 

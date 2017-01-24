@@ -1,17 +1,20 @@
 package main.java.data.generatePersistency.facade;
 
-import main.java.data.generatePersistency.dao.TestTableDAO;
-import main.java.domain.generateDomain.TestTable;
+import main.java.domain.generateDomain.Trigger;
+import main.java.domain.generateDomain.facade.GenerateDomainService;
 
 public class GeneratePersistencyService {
-    private TestTableDAO dao;
+    private static GeneratePersistencyService instance = null;
 
-    public GeneratePersistencyService() {
-        dao = new TestTableDAO();
+    public static GeneratePersistencyService getInstance() {
+        if(instance == null) {
+            instance = new GeneratePersistencyService();
+        }
+        return instance;
     }
 
-    public TestTable getTestTableData(int id)
-    {
-        return dao.getTestTable(id);
+
+    public void saveTrigger(Trigger trigger) {
+        //TODO database stuffz
     }
 }
