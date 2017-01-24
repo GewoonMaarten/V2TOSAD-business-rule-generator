@@ -39,8 +39,13 @@ public class BusinessruleType {
         this.targetDatabaseType = targetDatabaseType;
     }
 
-    public void createTemplate()
+    public void setTemplate(Template template)
     {
+        this.template = template;
+    }
 
+
+    public Template getTemplate() {
+        return template;
     }
 }

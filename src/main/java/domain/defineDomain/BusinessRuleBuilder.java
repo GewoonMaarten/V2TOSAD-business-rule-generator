@@ -1,16 +1,16 @@
 package main.java.domain.defineDomain;
 
-import main.java.data.definePersistency.facade.DefinePersistency;
+import main.java.data.definePersistency.facade.DefinePersistencyService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BusinessRuleBuilder {
 
-    public void defineBusinessRule(int businessRuleID)
+    public BusinessRule defineBusinessRule(int businessRuleID)
     {
-        HashMap<String,Object> details = DefinePersistency.getInstance().getBusinessRuleDetails(businessRuleID);
-        HashMap<String,Object> typeDetails = DefinePersistency.getInstance().getBusinessRuleTypeDetails(businessRuleID);
+        HashMap<String,Object> details = DefinePersistencyService.getInstance().getBusinessRuleDetails(businessRuleID);
+        HashMap<String,Object> typeDetails = DefinePersistencyService.getInstance().getBusinessRuleTypeDetails(businessRuleID);
 
         BusinessRule businessRule = new BusinessRule(businessRuleID, (String) details.get("name"), details);
         BusinessruleType businessruleType;
@@ -25,24 +25,30 @@ public class BusinessRuleBuilder {
         Category typeCategory = new Category((Integer)typeDetails.get("categoryid"),(String)typeDetails.get("categoryname"));
 
 
-        if(typeExample != "")
+        if(!typeExample.equals(""))
             businessruleType = new BusinessruleType(typeId,typeName,typeCode,typeDescription,typeCategory);
         else
             businessruleType = new BusinessruleType(typeId,typeName,typeCode,typeDescription, typeExample,typeCategory);
 
         businessRule.setRuleType(businessruleType);
 
-        TargetDatabaseType targetDatabaseType = new TargetDatabaseType(businessRuleID);
+        TargetDatabase targetDatabase = new TargetDatabase(businessRuleID);
+        TargetDatabaseType targetDatabaseType = new TargetDatabaseType(businessRuleID, (String) details.get("typename"));
 
         businessruleType.setTargetDatabaseType(targetDatabaseType);
 
-        ArrayList<HashMap<String,Object>> attributesDetails = DefinePersistency.getInstance().getBusinessRuleAttributesDetails(businessRuleID);
+        ArrayList<HashMap<String,Object>> attributesDetails = DefinePersistencyService.getInstance().getBusinessRuleAttributesDetails(businessRuleID);
         for(HashMap<String, Object> map : attributesDetails)
         {
             Attribute attribute = new Attribute(map);
             businessRule.addAttribue(attribute);
         }
 
-        //TODO figure the fuck out how template shit works
+        HashMap<String, Object> templateDetails = DefinePersistencyService.getInstance().getTemplateDetails(businessRuleID);
+
+        Template template = new Template(businessruleType, targetDatabase, (String) templateDetails.get("code"));
+        businessruleType.setTemplate(template);
+
+        return businessRule;
     }
 }

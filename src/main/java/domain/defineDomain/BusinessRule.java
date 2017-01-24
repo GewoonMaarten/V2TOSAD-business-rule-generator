@@ -45,4 +45,8 @@ public class BusinessRule {
     {
         attributes.add(attribute);
     }
+
+    public HashMap<String, Object> getValues() {
+        return values;
+    }
 }

@@ -1,6 +1,7 @@
 package main.java.domain.defineDomain.facade;
 
 import main.java.domain.defineDomain.BusinessRule;
+import main.java.domain.defineDomain.BusinessRuleBuilder;
 
 import java.util.ArrayList;
 
@@ -16,26 +17,17 @@ public class DefineDomainService {
         businessRules = new ArrayList<BusinessRule>();
     }
 
-    public DefineDomainService getInstance(){
+    public static DefineDomainService getInstance(){
         if(instance == null){
             instance = new DefineDomainService();
         }
         return instance;
     }
 
-    public void setGeneratedCode(int id, String code){
-        for (BusinessRule businessRule : businessRules){
-            if(businessRule.getId() == id){
-                businessRule.setGeneratedTrigger(code);
-            }
-        }
-    }
-    public ArrayList<String> getAllGeneratedBusinessRuleCode(){
-        ArrayList<String> allGeneratedBusinessRuleCode = new ArrayList<String>();
 
-        for(BusinessRule businessRule : businessRules){
-            allGeneratedBusinessRuleCode.add(businessRule.getGeneratedTrigger());
-        }
-        return allGeneratedBusinessRuleCode;
+    public BusinessRule getBusinessRule(int businessRuleID) {
+        BusinessRuleBuilder businessRuleBuilder = new BusinessRuleBuilder();
+
+        return businessRuleBuilder.defineBusinessRule(businessRuleID);
     }
 }

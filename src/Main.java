@@ -16,7 +16,7 @@ public class Main {
         rangeRoot.put("attribute", "salaris");
         rangeRoot.put("operator", "between");
         rangeRoot.put("value", value);
-        generator.generateBusinessRuleById(1, rangeRoot, "range");
+        generator.generateBusinessRuleById(1);
 
         HashMap compareRoot = new HashMap();
         HashMap compareValue = new HashMap<String, Object>();
@@ -27,7 +27,7 @@ public class Main {
         compareRoot.put("attribute", "name");
         compareRoot.put("operator", "!=");
         compareRoot.put("value", compareValue);
-        generator.generateBusinessRuleById(1, compareRoot, "compare");
+        generator.generateBusinessRuleById(1);
 
         HashMap root = new HashMap();
         root.put("name", "test_trg");

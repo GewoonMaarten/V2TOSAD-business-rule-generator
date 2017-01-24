@@ -1,6 +1,6 @@
 package main.java.domain.defineDomain;
 
-import main.java.data.definePersistency.facade.DefinePersistency;
+import main.java.data.definePersistency.facade.DefinePersistencyService;
 
 import java.util.HashMap;
 
@@ -14,7 +14,7 @@ public class TargetDatabase {
     private String username;
 
     public TargetDatabase(int bussinessRuleID) {
-        HashMap<String,Object> details = DefinePersistency.getInstance().getTargetDatabaseDetails(bussinessRuleID);
+        HashMap<String,Object> details = DefinePersistencyService.getInstance().getTargetDatabaseDetails(bussinessRuleID);
 
         id = (Integer)details.get("id");
         password = (String)details.get("password");

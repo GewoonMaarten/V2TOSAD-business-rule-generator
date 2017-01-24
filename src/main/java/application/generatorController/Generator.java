@@ -2,8 +2,13 @@ package main.java.application.generatorController;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import main.java.domain.defineDomain.BusinessRule;
+import main.java.domain.defineDomain.facade.DefineDomainService;
+import main.java.domain.generateDomain.Trigger;
+import main.java.domain.generateDomain.facade.GenerateDomainService;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,28 +20,30 @@ public class Generator {
         generatedTriggers = new ArrayList<String>();
     }
 
-    //ROOT AND BUSINESSRULETYPE ARE TEMPORARY PARAMETERS
-    public void generateBusinessRuleById(int id, HashMap root, String businessRule) {
+    public void generateBusinessRuleById(int businessRuleID) {
+        BusinessRule businessRule = DefineDomainService.getInstance().getBusinessRule(businessRuleID);
+        //Template temp = application.generatorController.StringReplaceConf.getInstance().getCfg().getTemplate("Oracle/attribute/"+businessRule+".ftl");
+        Trigger trigger = createTriggerWithTemplate(businessRule);
 
+        GenerateDomainService.getInstance().saveTrigger(trigger);
+    }
 
+    private Trigger createTriggerWithTemplate(BusinessRule businessRule) {
+        Trigger trigger = null;
         try {
-            Template temp = StringReplaceConf.getInstance().getCfg().getTemplate("Oracle/attribute/"+businessRule+".ftl");
+            Template freeMarkerTemplate;
             StringWriter sw = new StringWriter();
-            temp.process(root, sw);
+            freeMarkerTemplate = new Template("test", new StringReader(businessRule.getRuleType().getTemplate().getCode()), StringReplaceConf.getInstance().getCfg());
+            freeMarkerTemplate.process(businessRule.getValues(), sw);
 
-            //BusinessRule businessRule = new BusinessRule();
-            //businessRule.setGeneratedTrigger(sw.toString());
-
-            //System.out.println(sw.toString());
-            generatedTriggers.add(sw.toString());
-
-            //System.out.println(generatedParent(generatedTriggers));
-
-        }catch (IOException ioe){
-            ioe.printStackTrace();
-        }catch (TemplateException te){
-            te.printStackTrace();
+            trigger = new Trigger(sw.toString(), businessRule.getRuleType().getTemplate().getTargetDatabase());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
+            e.printStackTrace();
         }
+
+        return trigger;
     }
 
 

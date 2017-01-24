@@ -3,13 +3,13 @@ package main.java.data.definePersistency.facade;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DefinePersistency {
+public class DefinePersistencyService {
 
-    private static DefinePersistency instance = null;
+    private static DefinePersistencyService instance = null;
 
-    public static DefinePersistency getInstance(){
+    public static DefinePersistencyService getInstance(){
         if(instance == null){
-            instance = new DefinePersistency();
+            instance = new DefinePersistencyService();
         }
         return instance;
     }
@@ -41,6 +41,11 @@ public class DefinePersistency {
     public ArrayList<HashMap<String, Object>> getBusinessRuleAttributesDetails(int businessRuleID)
     {
         //TODO lookup target attribute main.java.data, expect multiple
+        return null;
+    }
+
+    public HashMap<String,Object> getTemplateDetails(int businessRuleID) {
+        //TODO lookup template
         return null;
     }
 }

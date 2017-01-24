@@ -1,16 +1,25 @@
 package main.java.domain.defineDomain;
 
+
 /**
  * Created by Maarten de Klerk on 17-1-2017.
  */
 public class Template {
     private BusinessruleType businessruleType;
     private TargetDatabase targetDatabase;
-    private String path;
+    private String code;
 
-    public Template(BusinessruleType businessruleType, TargetDatabase targetDatabase, String path) {
+    public Template(BusinessruleType businessruleType, TargetDatabase targetDatabase, String code) {
         this.businessruleType = businessruleType;
         this.targetDatabase = targetDatabase;
-        this.path = path;
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public TargetDatabase getTargetDatabase() {
+        return targetDatabase;
     }
 }
