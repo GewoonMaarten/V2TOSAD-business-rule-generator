@@ -1,6 +1,7 @@
 package main.java.domain.generateDomain;
 
 import main.java.domain.defineDomain.TargetDatabase;
+import main.java.domain.defineDomain.TargetDatabaseType;
 
 /**
  * Created by Maarten de Klerk on 13-1-2017.
@@ -8,18 +9,17 @@ import main.java.domain.defineDomain.TargetDatabase;
 public class Trigger {
 
     private String code;
-    private TargetDatabase targetDatabase;
-
-    public Trigger(String code, TargetDatabase targetDatabase) {
+    private TargetDatabaseType targetDatabaseType;
+    public Trigger(String code, TargetDatabaseType targetDatabase) {
         this.code = code;
-        this.targetDatabase = targetDatabase;
+        this.targetDatabaseType = targetDatabase;
     }
 
     public String getCode() {
         return code;
     }
 
-    public TargetDatabase getTargetDatabase() {
-        return targetDatabase;
+    public TargetDatabaseType getTargetDatabase() {
+        return targetDatabaseType;
     }
 }

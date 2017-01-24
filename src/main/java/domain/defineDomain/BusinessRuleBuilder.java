@@ -10,9 +10,10 @@ public class BusinessRuleBuilder {
     public BusinessRule defineBusinessRule(int businessRuleID)
     {
         HashMap<String,Object> details = DefinePersistencyService.getInstance().getBusinessRuleDetails(businessRuleID);
+        BusinessRule businessRule = new BusinessRule(businessRuleID, (String) details.get("name"), details);
         HashMap<String,Object> typeDetails = DefinePersistencyService.getInstance().getBusinessRuleTypeDetails(businessRuleID);
 
-        BusinessRule businessRule = new BusinessRule(businessRuleID, (String) details.get("name"), details);
+
         BusinessruleType businessruleType;
 
         int typeId = (Integer)typeDetails.get("id");
@@ -33,9 +34,7 @@ public class BusinessRuleBuilder {
         businessRule.setRuleType(businessruleType);
 
         TargetDatabase targetDatabase = new TargetDatabase(businessRuleID);
-        TargetDatabaseType targetDatabaseType = new TargetDatabaseType(businessRuleID, (String) details.get("typename"));
-
-        businessruleType.setTargetDatabaseType(targetDatabaseType);
+        businessRule.setTargetDatabase(targetDatabase);
 
         ArrayList<HashMap<String,Object>> attributesDetails = DefinePersistencyService.getInstance().getBusinessRuleAttributesDetails(businessRuleID);
         for(HashMap<String, Object> map : attributesDetails)
@@ -43,12 +42,6 @@ public class BusinessRuleBuilder {
             Attribute attribute = new Attribute(map);
             businessRule.addAttribue(attribute);
         }
-
-        HashMap<String, Object> templateDetails = DefinePersistencyService.getInstance().getTemplateDetails(businessRuleID);
-
-        Template template = new Template(businessruleType, targetDatabase, (String) templateDetails.get("code"));
-        businessruleType.setTemplate(template);
-
         return businessRule;
     }
 }

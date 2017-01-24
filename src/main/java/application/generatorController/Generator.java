@@ -33,10 +33,12 @@ public class Generator {
         try {
             Template freeMarkerTemplate;
             StringWriter sw = new StringWriter();
-            freeMarkerTemplate = new Template("test", new StringReader(businessRule.getRuleType().getTemplate().getCode()), StringReplaceConf.getInstance().getCfg());
+            main.java.domain.defineDomain.Template codeTemplate;
+            codeTemplate = DefineDomainService.getInstance().getTemplate(businessRule, businessRule.getTargetDatabase().getTargetDatabaseType().getId());
+            freeMarkerTemplate = new Template("test", new StringReader(codeTemplate.getCode()), StringReplaceConf.getInstance().getCfg());
             freeMarkerTemplate.process(businessRule.getValues(), sw);
 
-            trigger = new Trigger(sw.toString(), businessRule.getRuleType().getTemplate().getTargetDatabase());
+            trigger = new Trigger(sw.toString(), businessRule.getTargetDatabase().getTargetDatabaseType());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {

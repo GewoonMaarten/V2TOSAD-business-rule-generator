@@ -12,6 +12,7 @@ public class TargetDatabase {
     private TargetDatabaseType type;
     private String password;
     private String username;
+    private TargetDatabaseType targetDatabaseType;
 
     public TargetDatabase(int bussinessRuleID) {
         HashMap<String,Object> details = DefinePersistencyService.getInstance().getTargetDatabaseDetails(bussinessRuleID);
@@ -26,5 +27,9 @@ public class TargetDatabase {
     public TargetDatabaseType getTargetDatabaseType()
     {
         return type;
+    }
+
+    public void setTargetDatabaseType(TargetDatabaseType targetDatabaseType) {
+        this.targetDatabaseType = targetDatabaseType;
     }
 }

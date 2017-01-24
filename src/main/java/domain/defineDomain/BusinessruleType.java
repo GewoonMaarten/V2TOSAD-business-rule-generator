@@ -11,8 +11,6 @@ public class BusinessruleType {
     private String example;
     private Category category;
 
-    private TargetDatabaseType targetDatabaseType;
-    private Template template;
 
     public BusinessruleType(int id, String name, String code, String description, String example, Category category) {
         this.id = id;
@@ -31,21 +29,7 @@ public class BusinessruleType {
         this.category = category;
     }
 
-    public TargetDatabaseType getTargetDatabaseType() {
-        return targetDatabaseType;
-    }
-
-    public void setTargetDatabaseType(TargetDatabaseType targetDatabaseType) {
-        this.targetDatabaseType = targetDatabaseType;
-    }
-
-    public void setTemplate(Template template)
-    {
-        this.template = template;
-    }
-
-
-    public Template getTemplate() {
-        return template;
+    public int getId() {
+        return id;
     }
 }

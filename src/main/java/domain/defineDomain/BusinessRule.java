@@ -13,6 +13,7 @@ public class BusinessRule {
     private String generatedTrigger;
     private BusinessruleType ruleType;
     private ArrayList<Attribute> attributes;
+    private TargetDatabase targetDatabase;
 
     public BusinessRule(int id, String name, HashMap<String, Object> values) {
         this.id = id;
@@ -48,5 +49,13 @@ public class BusinessRule {
 
     public HashMap<String, Object> getValues() {
         return values;
+    }
+
+    public TargetDatabase getTargetDatabase() {
+        return targetDatabase;
+    }
+
+    public void setTargetDatabase(TargetDatabase targetDatabase) {
+        this.targetDatabase = targetDatabase;
     }
 }

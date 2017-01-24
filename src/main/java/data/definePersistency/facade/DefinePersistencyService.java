@@ -1,5 +1,7 @@
 package main.java.data.definePersistency.facade;
 
+import main.java.domain.defineDomain.BusinessRule;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -44,7 +46,7 @@ public class DefinePersistencyService {
         return null;
     }
 
-    public HashMap<String,Object> getTemplateDetails(int businessRuleID) {
+    public HashMap<String,Object> getTemplateDetails(int businessRuleTypeID, int targetDatabaseTypeID) {
         //TODO lookup template
         return null;
     }

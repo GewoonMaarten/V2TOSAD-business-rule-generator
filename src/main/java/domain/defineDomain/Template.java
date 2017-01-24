@@ -6,12 +6,12 @@ package main.java.domain.defineDomain;
  */
 public class Template {
     private BusinessruleType businessruleType;
-    private TargetDatabase targetDatabase;
+    private TargetDatabaseType targetDatabaseType;
     private String code;
 
-    public Template(BusinessruleType businessruleType, TargetDatabase targetDatabase, String code) {
+    public Template(BusinessruleType businessruleType, TargetDatabaseType targetDatabase, String code) {
         this.businessruleType = businessruleType;
-        this.targetDatabase = targetDatabase;
+        this.targetDatabaseType = targetDatabase;
         this.code = code;
     }
 
@@ -19,7 +19,11 @@ public class Template {
         return code;
     }
 
-    public TargetDatabase getTargetDatabase() {
-        return targetDatabase;
+    public BusinessruleType getBusinessruleType() {
+        return businessruleType;
+    }
+
+    public TargetDatabaseType getTargetDatabaseType() {
+        return targetDatabaseType;
     }
 }
