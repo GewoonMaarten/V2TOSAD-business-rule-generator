@@ -1,4 +1,4 @@
-package data.generatePersistency;
+package main.java.data.generatePersistency;
 
 import java.sql.*;
 

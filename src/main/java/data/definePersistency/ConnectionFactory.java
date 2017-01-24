@@ -1,4 +1,4 @@
-package data.definePersistency;
+package main.java.data.definePersistency;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

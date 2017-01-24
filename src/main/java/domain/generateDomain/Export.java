@@ -1,4 +1,4 @@
-package domain.generateDomain;
+package main.java.domain.generateDomain;
 
 /**
  * Created by emile on 23-1-2017.

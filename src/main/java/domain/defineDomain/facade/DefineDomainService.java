@@ -1,4 +1,4 @@
-package domain.defineDomain.facade;
+package main.java.domain.defineDomain.facade;
 
 public class DefineDomainService {
 //    private static DefineDomainService instance = null;

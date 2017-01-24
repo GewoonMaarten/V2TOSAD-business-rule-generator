@@ -1,8 +1,7 @@
-package application.generatorController;
+package main.java.application.generatorController;
 
-import data.generatePersistency.dao.TestTableDAO;
-import data.generatePersistency.facade.GeneratePersistencyService;
-import domain.generateDomain.TestTable;
+import main.java.data.generatePersistency.facade.GeneratePersistencyService;
+import main.java.domain.generateDomain.TestTable;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

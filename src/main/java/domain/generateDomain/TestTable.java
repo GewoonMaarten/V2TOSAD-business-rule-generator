@@ -1,4 +1,4 @@
-package domain.generateDomain;
+package main.java.domain.generateDomain;
 
 public class TestTable {
     private String TESTCOLUMN1;

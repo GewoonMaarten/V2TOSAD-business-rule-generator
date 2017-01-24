@@ -1,7 +1,7 @@
-package data.generatePersistency.facade;
+package main.java.data.generatePersistency.facade;
 
-import data.generatePersistency.dao.TestTableDAO;
-import domain.generateDomain.TestTable;
+import main.java.data.generatePersistency.dao.TestTableDAO;
+import main.java.domain.generateDomain.TestTable;
 
 public class GeneratePersistencyService {
     private TestTableDAO dao;

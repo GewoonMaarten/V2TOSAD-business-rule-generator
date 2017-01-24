@@ -1,4 +1,4 @@
-package data.generatePersistency.dao;
+package main.java.data.generatePersistency.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
