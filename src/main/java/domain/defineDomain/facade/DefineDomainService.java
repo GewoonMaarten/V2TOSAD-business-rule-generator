@@ -1,12 +1,9 @@
-package main.java.domain.defineDomain.facade;
+package domain.defineDomain.facade;
 
-import main.java.domain.defineDomain.BusinessRule;
+import domain.defineDomain.BusinessRule;
 
 import java.util.ArrayList;
 
-/**
- * Created by Maarten de Klerk on 18-1-2017.
- */
 public class DefineDomainService {
     private static DefineDomainService instance = null;
 
@@ -24,11 +21,11 @@ public class DefineDomainService {
     }
 
     public void setGeneratedCode(int id, String code){
-        for (BusinessRule businessRule : businessRules){
-            if(businessRule.getId() == id){
-                businessRule.setGeneratedTrigger(code);
-            }
-        }
+//        for (BusinessRule businessRule : businessRules){
+//            if(businessRule.getId() == id){
+//                businessRule.setGeneratedTrigger(code);
+//            }
+//        }
     }
     public ArrayList<String> getAllGeneratedBusinessRuleCode(){
         ArrayList<String> allGeneratedBusinessRuleCode = new ArrayList<String>();

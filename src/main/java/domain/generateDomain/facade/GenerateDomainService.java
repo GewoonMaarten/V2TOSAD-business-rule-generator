@@ -1,4 +1,4 @@
-package main.java.domain.generateDomain.facade;
+package domain.generateDomain.facade;
 
 public class GenerateDomainService {
 }
