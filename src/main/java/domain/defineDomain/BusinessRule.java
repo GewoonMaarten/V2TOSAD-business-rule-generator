@@ -1,5 +1,6 @@
 package domain.defineDomain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,14 +11,14 @@ public class BusinessRule {
     private String operator;
     private BusinessruleType ruleType;
     private TargetDatabase targetDatabase;
-    private ArrayList<TargetDatabaseTable> targetDatabaseTables;
+    private ArrayList<Attribute> attributes;
     private String error;
 
     public BusinessRule(int id, String name, String operator, String error) {
         this.id = id;
         this.name = name;
         this.operator = operator;
-        this.targetDatabaseTables = new ArrayList<TargetDatabaseTable>();
+        this.attributes = new ArrayList<Attribute>();
         this.error = error;
     }
 
@@ -38,8 +39,8 @@ public class BusinessRule {
         return operator;
     }
 
-    public ArrayList<TargetDatabaseTable> getTargetDatabaseTables() {
-        return targetDatabaseTables;
+    public ArrayList<Attribute> getAttributes() {
+        return attributes;
     }
 
     public String getError() {
@@ -58,9 +59,13 @@ public class BusinessRule {
         this.ruleType = ruleType;
     }
 
-    public void addTable(TargetDatabaseTable targetDatabaseTable)
+    public void addAtributes(ArrayList<HashMap<String, Object>> attributes)
     {
-        targetDatabaseTables.add(targetDatabaseTable);
+        for(HashMap<String, Object> attributeDetails: attributes)
+        {
+            this.attributes.add(new Attribute(((BigDecimal)attributeDetails.get("targetattributeid")).intValue(),
+                    (String)attributeDetails.get("name"), (String)attributeDetails.get("type")));
+        }
     }
 
     public TargetDatabase getTargetDatabase() {

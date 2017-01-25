@@ -34,16 +34,10 @@ public class DefinePersistencyService {
         return targetDatabaseDAO.getTargetDatabaseDetails(targetDatabaseID);
     }
 
-    public ArrayList<HashMap<String, Object>> getTargetDatabaseTablesDetails(int targetDatabaseID)
+    public ArrayList<HashMap<String, Object>> getAttributesFromBusinessRule(int businessRuleID)
     {
-        TargetDatabaseTableDAO targetDatabaseTableDAO = new TargetDatabaseTableDAO();
-        return targetDatabaseTableDAO.getTargetDatabaseTablesDetails(targetDatabaseID);
-    }
-
-    public ArrayList<HashMap<String, Object>> getTargetDatabaseTableAttributeDetails(int targetDatabaseTableID)
-    {
-        TargetDatabaseAttributeDAO targetDatabaseAttributeDAO = new TargetDatabaseAttributeDAO();
-        return targetDatabaseAttributeDAO.getTargetDatabaseAttributesDetails(targetDatabaseTableID);
+        AttributeDAO attributeDAO = new AttributeDAO();
+        return attributeDAO.getBusinessRuleAttributesDetails(businessRuleID);
     }
 
     public HashMap<String,Object> getTemplateDetails(int businessRuleTypeID, int targetDatabaseTypeID)

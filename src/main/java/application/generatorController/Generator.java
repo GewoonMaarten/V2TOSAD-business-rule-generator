@@ -15,19 +15,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Generator {
-    private ArrayList<String> generatedTriggers;
 
-    public Generator(){
-        generatedTriggers = new ArrayList<String>();
-    }
+    public Generator(){}
 
-
-    public void generateBusinessRuleById(int businessRuleID) {
+    public String generateBusinessRuleById(int businessRuleID) {
         BusinessRule businessRule = DefineDomainService.getInstance().getBusinessRule(businessRuleID);
-        //TriggerTemplate temp = application.generatorController.StringReplaceConf.getInstance().getCfg().getTemplate("Oracle/attribute/"+businessRule+".ftl");
         Trigger trigger = createTriggerWithTemplate(businessRule);
-
         GenerateDomainService.getInstance().saveTrigger(trigger);
+        return trigger.getCode();
     }
 
     private Trigger createTriggerWithTemplate(BusinessRule businessRule) {
