@@ -3,8 +3,9 @@ package domain.defineDomain.facade;
 import data.definePersistency.facade.DefinePersistencyService;
 import domain.defineDomain.BusinessRule;
 import domain.defineDomain.BusinessRuleBuilder;
-import domain.defineDomain.Template;
+import domain.defineDomain.TriggerTemplate;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,17 +25,14 @@ public class DefineDomainService {
         return instance;
     }
 
-
     public BusinessRule getBusinessRule(int businessRuleID) {
         BusinessRuleBuilder businessRuleBuilder = new BusinessRuleBuilder();
-
         return businessRuleBuilder.defineBusinessRule(businessRuleID);
     }
 
-    public Template getTemplate(BusinessRule businessRule, int targetDatabaseTypeId) {
-        HashMap<String, Object> details = DefinePersistencyService.getInstance().getTemplateDetails(businessRule.getRuleType().getId(), targetDatabaseTypeId);
-
-        Template template = new Template(businessRule.getRuleType(), businessRule.getTargetDatabase().getTargetDatabaseType(), (String) details.get("code"));
-        return template;
+    public TriggerTemplate getTemplate(BusinessRule businessRule) {
+        HashMap<String, Object> details = DefinePersistencyService.getInstance().getTemplateDetails(businessRule.getRuleType().getId(), businessRule.getTargetDatabase().getTargetDatabaseType().getId());
+        TriggerTemplate triggerTemplate = new TriggerTemplate(((BigDecimal)details.get("templateid")).intValue(), businessRule.getRuleType(), businessRule.getTargetDatabase().getTargetDatabaseType(), (String)details.get("templatecode"));
+        return triggerTemplate;
     }
 }

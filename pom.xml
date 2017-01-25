@@ -18,7 +18,7 @@
       <version>1.8</version>
   </dependency>
 
-    <!-- Template engine-->
+    <!-- TriggerTemplate engine-->
 
     <dependency>
       <groupId>org.freemarker</groupId>

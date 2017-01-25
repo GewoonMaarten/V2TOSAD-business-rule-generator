@@ -1,5 +1,6 @@
 package application.generatorController;
 
+import domain.defineDomain.TriggerTemplate;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class Generator {
 
     public void generateBusinessRuleById(int businessRuleID) {
         BusinessRule businessRule = DefineDomainService.getInstance().getBusinessRule(businessRuleID);
-        //Template temp = application.generatorController.StringReplaceConf.getInstance().getCfg().getTemplate("Oracle/attribute/"+businessRule+".ftl");
+        //TriggerTemplate temp = application.generatorController.StringReplaceConf.getInstance().getCfg().getTemplate("Oracle/attribute/"+businessRule+".ftl");
         Trigger trigger = createTriggerWithTemplate(businessRule);
 
         GenerateDomainService.getInstance().saveTrigger(trigger);
@@ -34,39 +35,29 @@ public class Generator {
         try {
             Template freeMarkerTemplate;
             StringWriter sw = new StringWriter();
-            domain.defineDomain.Template codeTemplate;
-            codeTemplate = DefineDomainService.getInstance().getTemplate(businessRule, businessRule.getTargetDatabase().getTargetDatabaseType().getId());
-            freeMarkerTemplate = new Template("test", new StringReader(codeTemplate.getCode()), StringReplaceConf.getInstance().getCfg());
-            freeMarkerTemplate.process(businessRule.getValues(), sw);
+            TriggerTemplate codeTriggerTemplate;
+            codeTriggerTemplate = DefineDomainService.getInstance().getTemplate(businessRule);
+            freeMarkerTemplate = new Template("Ronaldo", new StringReader(codeTriggerTemplate.getCode()), StringReplaceConf.getInstance().getCfg());
+            freeMarkerTemplate.process(this.getTemplateValues(businessRule), sw);
 
             trigger = new Trigger(sw.toString(), businessRule.getTargetDatabase().getTargetDatabaseType());
+            System.out.println(trigger.getCode());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-
         return trigger;
     }
 
-
-    public String generatedParent(HashMap root) {
-        String generatedParent = null;
-
-        try {
-            Template temp = StringReplaceConf.getInstance().getCfg().getTemplate("Oracle/parentTrigger.ftl");
-            StringWriter sw = new StringWriter();
-
-            root.put("generatedTriggers", generatedTriggers);
-
-            temp.process(root, sw);
-
-            generatedParent = sw.toString();
-        }catch (IOException ioe){
-            ioe.printStackTrace();
-        }catch (TemplateException te){
-            te.printStackTrace();
-        }
-        return generatedParent;
+    private HashMap<String, Object> getTemplateValues(BusinessRule businessRule)
+    {
+        HashMap<String, Object> templateValues = new HashMap<String, Object>();
+        templateValues.put("businessRuleName", businessRule.getName());
+        templateValues.put("targetDatabaseAttribute1", "age");
+        templateValues.put("operator", businessRule.getOperator());
+        templateValues.put("ruleTypeName", "2");
+        templateValues.put("compare", "compare yolo");
+        return templateValues;
     }
 }

@@ -46,8 +46,9 @@ public class DefinePersistencyService {
         return targetDatabaseAttributeDAO.getTargetDatabaseAttributesDetails(targetDatabaseTableID);
     }
 
-    public HashMap<String,Object> getTemplateDetails(int businessRuleTypeID, int targetDatabaseTypeID) {
-        //TODO lookup template
-        return null;
+    public HashMap<String,Object> getTemplateDetails(int businessRuleTypeID, int targetDatabaseTypeID)
+    {
+        TemplateDAO templateDAO = new TemplateDAO();
+        return templateDAO.getTemplateDetails(businessRuleTypeID, targetDatabaseTypeID);
     }
 }

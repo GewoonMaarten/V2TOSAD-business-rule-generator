@@ -11,7 +11,7 @@ public class BusinessRuleBuilder {
     public BusinessRule defineBusinessRule(int businessRuleID)
     {
         HashMap<String,Object> details = DefinePersistencyService.getInstance().getBusinessRuleDetails(businessRuleID);
-        BusinessRule businessRule = new BusinessRule(businessRuleID, (String) details.get("name"), details);
+        BusinessRule businessRule = new BusinessRule(businessRuleID, (String) details.get("name"), (String)details.get("operatorvalue"), (String)details.get("error"));
         HashMap<String,Object> typeDetails = DefinePersistencyService.getInstance().getBusinessRuleTypeDetails(((BigDecimal) details.get("businessruletypeid")).intValue());
 
         int typeId = ((BigDecimal)typeDetails.get("businessruletypeid")).intValue();

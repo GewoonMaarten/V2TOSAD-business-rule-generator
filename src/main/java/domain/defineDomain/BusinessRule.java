@@ -6,26 +6,44 @@ import java.util.HashMap;
 public class BusinessRule {
     private int id;
     private String name;
-    private HashMap<String, Object> values;
     private String generatedTrigger;
+    private String operator;
     private BusinessruleType ruleType;
-    private ArrayList<TargetDatabaseTable> targetDatabaseTables;
     private TargetDatabase targetDatabase;
+    private ArrayList<TargetDatabaseTable> targetDatabaseTables;
+    private String error;
 
-    public BusinessRule(int id, String name, HashMap<String, Object> values) {
+    public BusinessRule(int id, String name, String operator, String error) {
         this.id = id;
         this.name = name;
-        this.values = values;
+        this.operator = operator;
         this.targetDatabaseTables = new ArrayList<TargetDatabaseTable>();
+        this.error = error;
     }
 
     public String getGeneratedTrigger() {
         return generatedTrigger;
     }
 
-    public int getId() {
-
+    public int getId()
+    {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public ArrayList<TargetDatabaseTable> getTargetDatabaseTables() {
+        return targetDatabaseTables;
+    }
+
+    public String getError() {
+        return error;
     }
 
     public void setGeneratedTrigger(String generatedTrigger){
@@ -43,10 +61,6 @@ public class BusinessRule {
     public void addTable(TargetDatabaseTable targetDatabaseTable)
     {
         targetDatabaseTables.add(targetDatabaseTable);
-    }
-
-    public HashMap<String, Object> getValues() {
-        return values;
     }
 
     public TargetDatabase getTargetDatabase() {
