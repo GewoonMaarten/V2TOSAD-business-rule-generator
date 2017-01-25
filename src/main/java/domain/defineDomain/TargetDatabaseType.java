@@ -1,22 +1,15 @@
 package domain.defineDomain;
 
-import data.definePersistency.facade.DefinePersistencyService;
-
-import java.util.HashMap;
-
 public class TargetDatabaseType {
-    private int id;
-    private String name;
+    private int targetDatabaseTypeID;
+    private String targetDatabaseTypeName;
 
-    public TargetDatabaseType(int businessRuleID, String typename) {
-        HashMap<String,Object> details = DefinePersistencyService.getInstance().getTargetDatabaseTypeDetails(businessRuleID);
-        this.id = (Integer)details.get("id");
-        this.name = (String)details.get("name");
+    public TargetDatabaseType(int targetDatabaseTypeID, String targetDatabaseTypeName) {
+        this.targetDatabaseTypeID = targetDatabaseTypeID;
+        this.targetDatabaseTypeName = targetDatabaseTypeName;
     }
 
     public int getId() {
-        return id;
+        return targetDatabaseTypeID;
     }
-
-
 }

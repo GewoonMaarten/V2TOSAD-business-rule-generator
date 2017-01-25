@@ -4,29 +4,29 @@ import data.BaseDAO;
 import data.DbUtil;
 import data.definePersistency.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashMap;
 
-public class AttributeDAO extends BaseDAO
+public class TargetDatabaseDAO extends BaseDAO
 {
     private Connection connection;
     private Statement statement;
     private HashMap<String, Object> hashMap;
 
-    public AttributeDAO()
+    public TargetDatabaseDAO()
     {
         hashMap = new HashMap<String, Object>();
     }
 
-    public HashMap<String, Object> getBusinessRuleAttributesDetails(int targetDatabaseID)
+    public HashMap<String, Object> getTargetDatabaseDetails(int targetDatabaseID)
     {
         connection = ConnectionFactory.getConnection();
         try
         {
             statement = connection.createStatement();
-            String query = "SELECT  * FROM BUSINESSRULE WHERE BUSINESSRULEID = " + targetDatabaseID;
+            String query = "SELECT TARGETDATABASE.*, TARGETDATABASETYPE.NAME AS TARGETDATABASETYPENAME " +
+                    "FROM TARGETDATABASE LEFT OUTER JOIN TARGETDATABASETYPE ON TARGETDATABASETYPE.TARGETDATABASETYPEID = " +
+                    "TARGETDATABASE.TARGETDATABASEID WHERE TARGETDATABASEID = " + targetDatabaseID;
             hashMap = this.selectStatement(statement, query);
         }
         catch (SQLException e)

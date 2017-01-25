@@ -8,7 +8,6 @@ import domain.defineDomain.facade.DefineDomainService;
 import domain.generateDomain.Trigger;
 import domain.generateDomain.facade.GenerateDomainService;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;

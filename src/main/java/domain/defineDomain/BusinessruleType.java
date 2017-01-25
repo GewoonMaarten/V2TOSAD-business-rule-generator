@@ -18,14 +18,6 @@ public class BusinessruleType {
         this.category = category;
     }
 
-    public BusinessruleType(int id, String name, String code, String description, Category category) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-        this.description = description;
-        this.category = category;
-    }
-
     public int getId() {
         return id;
     }

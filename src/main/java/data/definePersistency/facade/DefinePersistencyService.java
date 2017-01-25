@@ -1,5 +1,9 @@
 package data.definePersistency.facade;
 
+import data.definePersistency.dao.BusinessRuleDAO;
+import data.definePersistency.dao.BusinessRuleTypeDAO;
+import data.definePersistency.dao.TargetDatabaseDAO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,26 +20,20 @@ public class DefinePersistencyService {
 
     public HashMap<String,Object> getBusinessRuleDetails(int businessRuleID)
     {
-        //TODO lookup business rule main.java.data all lowercase
-        return null;
+        BusinessRuleDAO businessRuleDAO = new BusinessRuleDAO();
+        return businessRuleDAO.getBusinessRuleDetails(businessRuleID);
     }
 
     public HashMap<String,Object> getBusinessRuleTypeDetails(int businessRuleID)
     {
-        //TODO lookup type main.java.data, add category main.java.data all lowercase ("category*")
-        return null;
+        BusinessRuleTypeDAO businessRuleTypeDAO = new BusinessRuleTypeDAO();
+        return businessRuleTypeDAO.getBusinessRuleTypeDetails(businessRuleID);
     }
 
-    public HashMap<String, Object> getTargetDatabaseTypeDetails(int businessRuleID)
+    public HashMap<String, Object> getTargetDatabaseDetails(int targetDatabaseID)
     {
-        //TODO lookup target database type main.java.data
-        return null;
-    }
-
-    public HashMap<String, Object> getTargetDatabaseDetails(int businessRuleID)
-    {
-        //TODO lookup target database main.java.data, add databasetype all lowercase ("type*")
-        return null;
+        TargetDatabaseDAO targetDatabaseDAO = new TargetDatabaseDAO();
+        return targetDatabaseDAO.getTargetDatabaseDetails(targetDatabaseID);
     }
 
     public ArrayList<HashMap<String, Object>> getBusinessRuleAttributesDetails(int businessRuleID)
