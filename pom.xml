@@ -12,13 +12,19 @@
 
     <!-- Dependencies voor JAX RS -->
 
-  <dependency>
+    <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-server</artifactId>
       <version>1.8</version>
-  </dependency>
+    </dependency>
+    <dependency>
+        <groupId>org.jvnet.jax-ws-commons</groupId>
+        <artifactId>jaxws-json</artifactId>
+        <version>1.2</version>
+    </dependency>
 
-    <!-- TriggerTemplate engine-->
+
+      <!-- TriggerTemplate engine-->
 
     <dependency>
       <groupId>org.freemarker</groupId>

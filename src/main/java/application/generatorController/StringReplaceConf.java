@@ -12,7 +12,7 @@ public class StringReplaceConf {
     private StringReplaceConf() {
         try {
             cfg = new Configuration(Configuration.VERSION_2_3_25);
-            cfg.setDirectoryForTemplateLoading(new File("./templates/"));
+            cfg.setDirectoryForTemplateLoading(new File("/"));
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
             cfg.setLogTemplateExceptions(false);
