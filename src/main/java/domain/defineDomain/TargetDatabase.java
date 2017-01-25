@@ -2,6 +2,7 @@ package domain.defineDomain;
 
 import data.definePersistency.facade.DefinePersistencyService;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 public class TargetDatabase {
@@ -16,13 +17,13 @@ public class TargetDatabase {
     public TargetDatabase(int targetDatabaseID) {
         HashMap<String,Object> details = DefinePersistencyService.getInstance().getTargetDatabaseDetails(targetDatabaseID);
 
-        targetdatabaseid = (Integer)details.get("targetdatabaseid");
+        targetdatabaseid = ((BigDecimal)details.get("targetdatabaseid")).intValue();
         application = (String)details.get("application");
         applicationshort = (String)details.get("applicationshort");
         url = (String)details.get("url");
         username = (String)details.get("username");
         password = (String)details.get("password");
-        targetDatabaseType = new TargetDatabaseType((Integer)details.get("targetdatabasetypeid"),(String)details.get("targetdatabasetypename"));
+        targetDatabaseType = new TargetDatabaseType(((BigDecimal)details.get("targetdatabasetypeid")).intValue(),(String)details.get("targetdatabasetypename"));
     }
 
     public TargetDatabaseType getTargetDatabaseType()

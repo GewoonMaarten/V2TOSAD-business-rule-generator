@@ -27,7 +27,7 @@ public class AttributeDAO extends BaseDAO
         {
             statement = connection.createStatement();
             String query = "SELECT  * FROM BUSINESSRULE WHERE BUSINESSRULEID = " + targetDatabaseID;
-            hashMap = this.selectStatement(statement, query);
+            hashMap = this.selectOneRecord(statement, query);
         }
         catch (SQLException e)
         {

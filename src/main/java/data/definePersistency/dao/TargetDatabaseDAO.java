@@ -27,7 +27,7 @@ public class TargetDatabaseDAO extends BaseDAO
             String query = "SELECT TARGETDATABASE.*, TARGETDATABASETYPE.NAME AS TARGETDATABASETYPENAME " +
                     "FROM TARGETDATABASE LEFT OUTER JOIN TARGETDATABASETYPE ON TARGETDATABASETYPE.TARGETDATABASETYPEID = " +
                     "TARGETDATABASE.TARGETDATABASEID WHERE TARGETDATABASEID = " + targetDatabaseID;
-            hashMap = this.selectStatement(statement, query);
+            hashMap = this.selectOneRecord(statement, query);
         }
         catch (SQLException e)
         {

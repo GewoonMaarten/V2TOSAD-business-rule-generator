@@ -9,13 +9,14 @@ public class BusinessRule {
     private HashMap<String, Object> values;
     private String generatedTrigger;
     private BusinessruleType ruleType;
-    private ArrayList<TargetAttribute> targetAttributes;
+    private ArrayList<TargetDatabaseTable> targetDatabaseTables;
     private TargetDatabase targetDatabase;
 
     public BusinessRule(int id, String name, HashMap<String, Object> values) {
         this.id = id;
         this.name = name;
         this.values = values;
+        this.targetDatabaseTables = new ArrayList<TargetDatabaseTable>();
     }
 
     public String getGeneratedTrigger() {
@@ -39,9 +40,9 @@ public class BusinessRule {
         this.ruleType = ruleType;
     }
 
-    public void addAttribue(TargetAttribute targetAttribute)
+    public void addTable(TargetDatabaseTable targetDatabaseTable)
     {
-        targetAttributes.add(targetAttribute);
+        targetDatabaseTables.add(targetDatabaseTable);
     }
 
     public HashMap<String, Object> getValues() {

@@ -24,7 +24,7 @@ public class BusinessRuleDAO extends BaseDAO{
         {
         statement = connection.createStatement();
         String query = "SELECT * FROM BUSINESSRULE WHERE BUSINESSRULEID = " + businessRuleID;
-        hashMap = this.selectStatement(statement, query);
+        hashMap = this.selectOneRecord(statement, query);
         }
         catch (SQLException e)
         {

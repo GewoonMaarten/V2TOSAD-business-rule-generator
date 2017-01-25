@@ -7,28 +7,28 @@ import data.definePersistency.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BusinessRuleTypeDAO extends BaseDAO{
-
+public class TargetDatabaseTableDAO extends BaseDAO
+{
     private Connection connection;
     private Statement statement;
-    private HashMap<String, Object> hashMap;
+    private ArrayList<HashMap<String, Object>> hashMap;
 
-    public BusinessRuleTypeDAO()
+    public TargetDatabaseTableDAO()
     {
-        hashMap = new HashMap<String, Object>();
+        hashMap = new ArrayList<HashMap<String, Object>>();
     }
 
-    public HashMap<String, Object> getBusinessRuleTypeDetails(int businessRuleTypeID)
+    public ArrayList<HashMap<String, Object>> getTargetDatabaseTablesDetails(int targetDatabaseID)
     {
         connection = ConnectionFactory.getConnection();
         try
         {
             statement = connection.createStatement();
-            String query = "SELECT BUSINESSRULETYPE.*, CATEGORY.NAME AS CATEGORYNAME FROM BUSINESSRULETYPE LEFT OUTER JOIN CATEGORY ON " +
-                    "CATEGORY.CATEGORYID = BUSINESSRULETYPE.CATEGORYID WHERE BUSINESSRULETYPEID = " + businessRuleTypeID;
-            hashMap = this.selectOneRecord(statement, query);
+            String query = "SELECT TARGETTABLE.* FROM TARGETTABLE WHERE TARGETDATABASEID = " + targetDatabaseID;
+            hashMap = this.selectAllRecords(statement, query);
         }
         catch (SQLException e)
         {
@@ -41,5 +41,4 @@ public class BusinessRuleTypeDAO extends BaseDAO{
         }
         return hashMap;
     }
-
 }

@@ -14,9 +14,6 @@ public class BusinessRuleBuilder {
         BusinessRule businessRule = new BusinessRule(businessRuleID, (String) details.get("name"), details);
         HashMap<String,Object> typeDetails = DefinePersistencyService.getInstance().getBusinessRuleTypeDetails(((BigDecimal) details.get("businessruletypeid")).intValue());
 
-
-        BusinessruleType businessruleType;
-
         int typeId = ((BigDecimal)typeDetails.get("businessruletypeid")).intValue();
         String typeName = (String)typeDetails.get("name");
         String typeCode = (String)typeDetails.get("code");
@@ -24,18 +21,18 @@ public class BusinessRuleBuilder {
         String typeExample = (String)typeDetails.get("example");
         Category typeCategory = new Category(((BigDecimal)typeDetails.get("categoryid")).intValue(),(String)typeDetails.get("categoryname"));
 
-        businessruleType = new BusinessruleType(typeId,typeName,typeCode,typeDescription, typeExample,typeCategory);
+        BusinessruleType businessruleType = new BusinessruleType(typeId,typeName,typeCode,typeDescription, typeExample,typeCategory);
 
         businessRule.setRuleType(businessruleType);
 
         TargetDatabase targetDatabase = new TargetDatabase(((BigDecimal)details.get("targetdatabaseid")).intValue());
         businessRule.setTargetDatabase(targetDatabase);
 
-        ArrayList<HashMap<String,Object>> attributesDetails = DefinePersistencyService.getInstance().getBusinessRuleAttributesDetails(businessRuleID);
-        for(HashMap<String, Object> map : attributesDetails)
+        ArrayList<HashMap<String, Object>> targetDatabaseTables = DefinePersistencyService.getInstance().getTargetDatabaseTablesDetails(((BigDecimal)details.get("targetdatabaseid")).intValue());
+        for(HashMap<String, Object> tableDetails : targetDatabaseTables)
         {
-            TargetAttribute targetAttribute = new TargetAttribute(map);
-            businessRule.addAttribue(targetAttribute);
+            TargetDatabaseTable targetDatabaseTable = new TargetDatabaseTable(((BigDecimal) tableDetails.get("targettableid")).intValue(), (String) tableDetails.get("name"));
+            businessRule.addTable(targetDatabaseTable);
         }
         return businessRule;
     }
