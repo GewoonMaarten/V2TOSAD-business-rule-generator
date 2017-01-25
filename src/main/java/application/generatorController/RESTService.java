@@ -13,9 +13,6 @@ public class RESTService {
     // Uncomment for get body, function param should be "String msg"
     // @Consumes("text/plain")
     public Response getMsg(@PathParam("businessRuleID") String businessRuleID) {
-
-//        TestTable testTable = gps.getTestTableData(1);
-//
 //        String output = testTable.toString();
 
         String output = "hoi";
