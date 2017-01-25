@@ -43,6 +43,11 @@ public class BusinessRule {
         return attributes;
     }
 
+    public Attribute getAttribute(int index)
+    {
+        return attributes.get(index);
+    }
+
     public String getError() {
         return error;
     }

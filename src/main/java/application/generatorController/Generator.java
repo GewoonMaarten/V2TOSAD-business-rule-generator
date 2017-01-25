@@ -48,9 +48,15 @@ public class Generator {
     {
         HashMap<String, Object> templateValues = new HashMap<String, Object>();
         templateValues.put("businessRuleName", businessRule.getName());
-        templateValues.put("targetDatabaseAttribute1", "age");
         templateValues.put("operator", businessRule.getOperator());
         templateValues.put("compare", "2");
+
+        int rowCounter = 0;
+        while (rowCounter < businessRule.getAttributes().size())
+        {
+            templateValues.put("attribute" + Integer.toString(rowCounter + 1), businessRule.getAttribute(rowCounter).getName());
+            rowCounter += 1;
+        }
         return templateValues;
     }
 }
