@@ -27,9 +27,9 @@ public class AttributeDAO extends BaseDAO
         try
         {
             statement = connection.createStatement();
-            String query = "SELECT TARGETATTRIBUTE.* FROM BUSINESSRULEVALUE LEFT OUTER JOIN TARGETATTRIBUTE ON " +
+            String query = "SELECT * FROM BUSINESSRULEVALUE LEFT OUTER JOIN TARGETATTRIBUTE ON " +
                     "TARGETATTRIBUTE.TARGETATTRIBUTEID = BUSINESSRULEVALUE.TARGETATTRIBUTEID WHERE " +
-                    "BUSINESSRULEVALUE.BUSINESSRULEID = " + businessRuleID;
+                    "BUSINESSRULEVALUE.BUSINESSRULEID = " + businessRuleID + "ORDER BY BUSINESSRULEVALUE.POSITION ASC";
             hashMap = this.selectAllRecords(statement, query);
         }
         catch (SQLException e)

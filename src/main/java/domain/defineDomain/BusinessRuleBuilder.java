@@ -28,8 +28,9 @@ public class BusinessRuleBuilder {
         TargetDatabase targetDatabase = new TargetDatabase(((BigDecimal)details.get("targetdatabaseid")).intValue());
         businessRule.setTargetDatabase(targetDatabase);
 
-        ArrayList<HashMap<String, Object>> businessRuleAttributes = DefinePersistencyService.getInstance().getAttributesFromBusinessRule(businessRule.getId());
+        ArrayList<HashMap<String, Object>> businessRuleAttributes = DefinePersistencyService.getInstance().getAttributesFromBusinessRuleDetails(businessRule.getId());
         businessRule.addAtributes(businessRuleAttributes);
+        businessRule.addValues(businessRuleAttributes);
 
         return businessRule;
     }

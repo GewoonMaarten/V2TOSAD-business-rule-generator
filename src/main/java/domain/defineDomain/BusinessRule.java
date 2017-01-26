@@ -12,6 +12,7 @@ public class BusinessRule {
     private BusinessruleType ruleType;
     private TargetDatabase targetDatabase;
     private ArrayList<Attribute> attributes;
+    private ArrayList<Integer> values;
     private String error;
 
     public BusinessRule(int id, String name, String operator, String error) {
@@ -19,6 +20,7 @@ public class BusinessRule {
         this.name = name;
         this.operator = operator;
         this.attributes = new ArrayList<Attribute>();
+        this.values = new ArrayList<Integer>();
         this.error = error;
     }
 
@@ -48,6 +50,10 @@ public class BusinessRule {
         return attributes.get(index);
     }
 
+    public ArrayList<Integer> getValues() {
+        return values;
+    }
+
     public String getError() {
         return error;
     }
@@ -68,8 +74,20 @@ public class BusinessRule {
     {
         for(HashMap<String, Object> attributeDetails: attributes)
         {
-            this.attributes.add(new Attribute(((BigDecimal)attributeDetails.get("targetattributeid")).intValue(),
-                    (String)attributeDetails.get("name"), (String)attributeDetails.get("type")));
+            if(attributeDetails.get("targetattributeid") != null) {
+                this.attributes.add(new Attribute(((BigDecimal) attributeDetails.get("targetattributeid")).intValue(),
+                        (String) attributeDetails.get("name"), (String) attributeDetails.get("type")));
+            }
+        }
+    }
+
+    public void addValues(ArrayList<HashMap<String, Object>> values)
+    {
+        for(HashMap<String, Object> attributeDetails: values)
+        {
+            if(attributeDetails.get("value") != null) {
+                this.values.add((Integer.parseInt((String)attributeDetails.get("value"))));
+            }
         }
     }
 

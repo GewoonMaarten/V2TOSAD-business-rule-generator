@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-    //bron: http://theopentutorials.com/tutorials/java/jdbc/jdbc-examples-introduction/
     private static ConnectionFactory instance = new ConnectionFactory();
     public static final String host = "jdbc:oracle:thin:@ondora02.hu.nl:8521/cursus02.hu.nl";
     public static final String username = "tosad_2016_2a_team2";

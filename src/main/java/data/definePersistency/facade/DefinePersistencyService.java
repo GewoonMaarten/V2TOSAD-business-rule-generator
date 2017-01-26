@@ -34,7 +34,7 @@ public class DefinePersistencyService {
         return targetDatabaseDAO.getTargetDatabaseDetails(targetDatabaseID);
     }
 
-    public ArrayList<HashMap<String, Object>> getAttributesFromBusinessRule(int businessRuleID)
+    public ArrayList<HashMap<String, Object>> getAttributesFromBusinessRuleDetails(int businessRuleID)
     {
         AttributeDAO attributeDAO = new AttributeDAO();
         return attributeDAO.getBusinessRuleAttributesDetails(businessRuleID);
