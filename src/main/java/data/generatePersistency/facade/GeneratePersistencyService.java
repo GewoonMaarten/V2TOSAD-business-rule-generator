@@ -1,7 +1,5 @@
 package data.generatePersistency.facade;
 
-import domain.generateDomain.Trigger;
-
 public class GeneratePersistencyService {
     private static GeneratePersistencyService instance = null;
 
@@ -13,7 +11,7 @@ public class GeneratePersistencyService {
     }
 
 
-    public void saveTrigger(Trigger trigger) {
+    public void saveTrigger(String triggerCode, String targetDatabase) {
         //TODO database stuffz
     }
 }

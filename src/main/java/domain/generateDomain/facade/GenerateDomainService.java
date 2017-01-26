@@ -14,6 +14,6 @@ public class GenerateDomainService {
     }
 
     public void saveTrigger(Trigger trigger) {
-        GeneratePersistencyService.getInstance().saveTrigger(trigger);
+        GeneratePersistencyService.getInstance().saveTrigger(trigger.getCode(), trigger.getTargetDatabase().toString());
     }
 }

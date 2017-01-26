@@ -35,7 +35,7 @@ public class Generator {
             freeMarkerTemplate = new Template(businessRule.getName(), new StringReader(codeTriggerTemplate.getCode()), StringReplaceConf.getInstance().getCfg());
             freeMarkerTemplate.process(this.getTemplateValues(businessRule), sw);
 
-            trigger = new Trigger(sw.toString(), businessRule.getTargetDatabase().getTargetDatabaseType());
+            trigger = new Trigger(sw.toString(), businessRule.getTargetDatabase());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {

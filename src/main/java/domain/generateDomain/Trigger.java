@@ -1,20 +1,20 @@
 package domain.generateDomain;
 
-import domain.defineDomain.TargetDatabaseType;
+import domain.defineDomain.TargetDatabase;
 
 public class Trigger {
     private String code;
-    private TargetDatabaseType targetDatabaseType;
-    public Trigger(String code, TargetDatabaseType targetDatabase) {
+    private TargetDatabase targetDatabase;
+    public Trigger(String code, TargetDatabase targetDatabase) {
         this.code = code;
-        this.targetDatabaseType = targetDatabase;
+        this.targetDatabase = targetDatabase;
     }
 
     public String getCode() {
         return code;
     }
 
-    public TargetDatabaseType getTargetDatabase() {
-        return targetDatabaseType;
+    public TargetDatabase getTargetDatabase() {
+        return targetDatabase;
     }
 }
