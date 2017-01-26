@@ -67,6 +67,23 @@ public class DefineDomainService {
             templateValues.put("value" + Integer.toString(rowCounter + 1), businessRule.getValue(rowCounter));
             rowCounter += 1;
         }
+
+        rowCounter = 0;
+        String listOfValues = "";
+        while (rowCounter < businessRule.getValues().size())
+        {
+            if(rowCounter == 0)
+            {
+                listOfValues += "'" + businessRule.getValue(rowCounter) + "'";
+            }
+            else
+            {
+                listOfValues += ",'" + businessRule.getValue(rowCounter) + "'";
+            }
+            rowCounter += 1;
+        }
+        templateValues.put("listOfValues", listOfValues);
+
         return templateValues;
     }
 
