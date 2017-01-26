@@ -3,7 +3,6 @@ package application.generatorController;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import java.io.IOException;
-import domain.defineDomain.BusinessRule;
 import domain.defineDomain.facade.DefineDomainService;
 
 import java.io.StringReader;
@@ -14,17 +13,17 @@ public class Generator {
     public Generator(){}
 
     public String generateBusinessRuleById(int businessRuleID) {
-        // TODO save generated trigger in the database
-        BusinessRule businessRule = DefineDomainService.getInstance().getBusinessRule(businessRuleID);
-        return this.getTriggerCode(businessRule);
+        int definedBusinessRuleID = DefineDomainService.getInstance().defineBusinessRule(businessRuleID);
+        return this.getTriggerCode(definedBusinessRuleID);
     }
 
-    private String getTriggerCode(BusinessRule businessRule) {
+    private String getTriggerCode(int businessRuleID) {
         StringWriter sw = new StringWriter();
-        String triggerTemplateCode = DefineDomainService.getInstance().getTriggerTemplateCode(businessRule);
+        String triggerTemplateCode = DefineDomainService.getInstance().getTriggerTemplateCode(businessRuleID);
         try {
-            Template freeMarkerTemplate = new Template(businessRule.getName(), new StringReader(triggerTemplateCode), StringReplaceConf.getInstance().getCfg());
-            freeMarkerTemplate.process(DefineDomainService.getInstance().getTemplateVariables(businessRule), sw);
+            Template freeMarkerTemplate = new Template(DefineDomainService.getInstance().getBusinessRuleName(businessRuleID),
+                    new StringReader(triggerTemplateCode), StringReplaceConf.getInstance().getCfg());
+            freeMarkerTemplate.process(DefineDomainService.getInstance().getTemplateVariables(businessRuleID), sw);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
