@@ -54,6 +54,11 @@ public class BusinessRule {
         return values;
     }
 
+    public int getValue(int index)
+    {
+        return values.get(index);
+    }
+
     public String getError() {
         return error;
     }
