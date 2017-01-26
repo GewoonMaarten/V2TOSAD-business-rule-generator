@@ -11,7 +11,6 @@
   <dependencies>
 
     <!-- Dependencies voor JAX RS -->
-
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-server</artifactId>
@@ -23,25 +22,14 @@
         <version>1.2</version>
     </dependency>
 
-
-      <!-- TriggerTemplate engine-->
-
+    <!-- TriggerTemplate engine-->
     <dependency>
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
       <version>2.3.25-incubating</version>
     </dependency>
 
-    <!-- Hibernate ORM -->
-
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>5.2.6.Final</version>
-    </dependency>
-
     <!-- SQL Drivers -->
-
     <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>

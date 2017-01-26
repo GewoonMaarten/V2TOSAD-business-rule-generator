@@ -1,8 +1,0 @@
-
--- Tutorials & Examples --
-
-Jersey examples
-    https://github.com/jersey/jersey/tree/2.25.1/examples/
-
-Hibernate tutorials
-    https://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/session-configuration.html
