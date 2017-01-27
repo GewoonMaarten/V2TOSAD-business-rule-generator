@@ -1,6 +1,10 @@
 package data.generatePersistency;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -13,32 +17,39 @@ public class ConnectionFactory {
     public static final String DRIVER_CLASS = "oracle.jdbc.OracleDriver";
 
     public ConnectionFactory()
-    {
+    {/*
         try
         {
             Class.forName(DRIVER_CLASS);
         }
         catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-    private Connection createConnection()
+    private Connection createConnection(String host, String username, String password, String DRIVER_CLASS)
     {
         Connection connection = null;
-        try
-        {
-            connection = DriverManager.getConnection(host, username, password);
-        }
-        catch (SQLException e)
-        {
+
+        Connection conn = null;
+        try {
+            Class.forName(this.DRIVER_CLASS);
+            String db_class;
+            db_class = DriverManager.getConnection(host, username, password).getClass().getName();
+            System.out.println(db_class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         return connection;
     }
 
-    public static Connection getConnection()
+    public static Connection getConnection(String host, String username, String password, String databasetype)
     {
-        return instance.createConnection();
+        return instance.createConnection(host, username, password, databasetype);
     }
+
+
 }
