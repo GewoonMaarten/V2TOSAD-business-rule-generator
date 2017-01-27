@@ -27,16 +27,21 @@ public class ConnectionFactory {
         }*/
     }
 
-    private Connection createConnection(String host, String username, String password, String DRIVER_CLASS)
+    private Connection createConnection(String host, String username, String password, String databaseType)
     {
         Connection connection = null;
+        String DRIVER_CLASS;
 
-        Connection conn = null;
         try {
+            if (databaseType.equals("MYSQL")) {
+                DRIVER_CLASS = "com.mysql.jdbc.Driver";
+            } else if (databaseType.equals("ORACLE")) {
+                DRIVER_CLASS = "oracle.jdbc.OracleDriver";
+            } else if (databaseType.equals("POSTGRESQL")) {
+                DRIVER_CLASS = "org.postgresql.Driver";
+            }
             Class.forName(this.DRIVER_CLASS);
-            String db_class;
-            db_class = DriverManager.getConnection(host, username, password).getClass().getName();
-            System.out.println(db_class);
+            connection = DriverManager.getConnection(host, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
