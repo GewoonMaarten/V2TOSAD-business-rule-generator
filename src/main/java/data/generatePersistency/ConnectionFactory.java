@@ -1,6 +1,10 @@
 package data.generatePersistency;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -13,32 +17,44 @@ public class ConnectionFactory {
     public static final String DRIVER_CLASS = "oracle.jdbc.OracleDriver";
 
     public ConnectionFactory()
-    {
+    {/*
         try
         {
             Class.forName(DRIVER_CLASS);
         }
         catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-    private Connection createConnection()
+    private Connection createConnection(String host, String username, String password, String databaseType)
     {
         Connection connection = null;
-        try
-        {
+        String DRIVER_CLASS="";
+
+        try {
+            if (databaseType.equals("MYSQL")) {
+                DRIVER_CLASS = "com.mysql.jdbc.Driver";
+            } else if (databaseType.equals("ORACLE")) {
+                DRIVER_CLASS = "oracle.jdbc.OracleDriver";
+            } else if (databaseType.equals("POSTGRESQL")) {
+                DRIVER_CLASS = "org.postgresql.Driver";
+            }
+            Class.forName(DRIVER_CLASS);
             connection = DriverManager.getConnection(host, username, password);
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         return connection;
     }
 
-    public static Connection getConnection()
+    public static Connection getConnection(String host, String username, String password, String databasetype)
     {
-        return instance.createConnection();
+        return instance.createConnection(host, username, password, databasetype);
     }
+
+
 }

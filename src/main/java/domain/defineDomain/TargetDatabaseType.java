@@ -12,4 +12,8 @@ public class TargetDatabaseType {
     public int getId() {
         return targetDatabaseTypeID;
     }
+
+    public String getTargetDatabaseTypeName() {
+        return targetDatabaseTypeName;
+    }
 }

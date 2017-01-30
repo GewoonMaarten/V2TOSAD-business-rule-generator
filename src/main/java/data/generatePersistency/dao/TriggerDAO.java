@@ -1,23 +1,32 @@
 package data.generatePersistency.dao;
 
-public class TriggerDAO {
+import data.BaseDAO;
+import data.DbUtil;
+import data.generatePersistency.ConnectionFactory;
 
-//    public ArrayList<ArrayList> getTestRecordsFromTargetDatabase()
-//    {
-//        ArrayList<ArrayList> allRecords = new ArrayList<ArrayList>();
-//        try {
-//            Statement stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery("SELECT * from TESTTABLE");
-//            while (rs.next()){
-//                ArrayList<String> list = new ArrayList<String>();
-//                list.add(rs.getString("TESTCOLUMN1"));
-//                list.add(rs.getString("TESTCOLUMN2"));
-//                list.add(rs.getString("TESTCOLUMN3"));
-//                allRecords.add(list);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return allRecords;
-//    }
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+
+public class TriggerDAO  extends BaseDAO{
+
+    private Connection connection;
+    private Statement statement;
+
+    public void saveTrigger(String triggerCode, HashMap<String,String> targetDatabaseDetails)
+    {
+        connection = ConnectionFactory.getConnection(targetDatabaseDetails.get("host"), targetDatabaseDetails.get("username"), targetDatabaseDetails.get("password"), targetDatabaseDetails.get("databasetype"));
+
+        try {
+            statement = connection.createStatement();
+            statement.execute(triggerCode);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.close(statement);
+            DbUtil.close(connection);
+        }
+    }
+
 }
