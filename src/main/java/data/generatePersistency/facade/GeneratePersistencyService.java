@@ -1,5 +1,6 @@
 package data.generatePersistency.facade;
 
+import data.generatePersistency.dao.ParentTemplateDAO;
 import data.generatePersistency.dao.TriggerDAO;
 
 import java.util.HashMap;
@@ -15,8 +16,16 @@ public class GeneratePersistencyService {
     }
 
 
-    public void saveTrigger(String triggerCode, HashMap<String, Object> targetDatabase) {
+    public void executeTrigger(String triggerCode, HashMap<String, Object> targetDatabase) {
         TriggerDAO triggerDAO = new TriggerDAO();
-        triggerDAO.saveTrigger(triggerCode, targetDatabase);
+        triggerDAO.executeTrigger(triggerCode, targetDatabase);
+    }
+
+    public String getParentTemplate(int targetDatabaseTypeID) {
+        ParentTemplateDAO parentTemplateDAO = new ParentTemplateDAO();
+        //TODO recheck conformance with database!
+        HashMap<String, Object> parentTemplateDetails = parentTemplateDAO.getParentTemplateDetails(targetDatabaseTypeID);
+        return (String) parentTemplateDetails.get("code");
+
     }
 }

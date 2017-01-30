@@ -14,7 +14,7 @@ public class TriggerDAO  extends BaseDAO{
     private Connection connection;
     private Statement statement;
 
-    public void saveTrigger(String triggerCode, HashMap<String, Object> targetDatabaseDetails)
+    public void executeTrigger(String triggerCode, HashMap<String, Object> targetDatabaseDetails)
     {
         connection = ConnectionFactory.getConnection(targetDatabaseDetails);
 
