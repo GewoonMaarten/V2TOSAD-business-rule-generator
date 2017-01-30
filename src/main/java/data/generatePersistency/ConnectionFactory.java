@@ -1,34 +1,23 @@
 package data.generatePersistency;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class ConnectionFactory {
-    //bron: http://theopentutorials.com/tutorials/java/jdbc/jdbc-examples-introduction/
     private static ConnectionFactory instance = new ConnectionFactory();
-    public static final String host = "jdbc:oracle:thin:@ondora02.hu.nl:8521/cursus02.hu.nl";
-    public static final String username = "tosad_2016_2a_team2_target";
-    public static final String password= "tosad_2016_2a_team2_target";
-    public static final String DRIVER_CLASS = "oracle.jdbc.OracleDriver";
 
     public ConnectionFactory()
-    {/*
-        try
-        {
-            Class.forName(DRIVER_CLASS);
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
+    {
     }
 
-    private Connection createConnection(String host, String username, String password, String databaseType)
+    private Connection createConnection(HashMap<String, Object> targetDatabaseDetails)
     {
+        String databaseType = (String) targetDatabaseDetails.get("databasetype");
+        String host = (String) targetDatabaseDetails.get("host");
+        String username = (String) targetDatabaseDetails.get("username");
+        String password = (String) targetDatabaseDetails.get("password");
         Connection connection = null;
         String DRIVER_CLASS="";
 
@@ -51,10 +40,8 @@ public class ConnectionFactory {
         return connection;
     }
 
-    public static Connection getConnection(String host, String username, String password, String databasetype)
+    public static Connection getConnection(HashMap<String, Object> targetDatabaseDetails)
     {
-        return instance.createConnection(host, username, password, databasetype);
+        return instance.createConnection(targetDatabaseDetails);
     }
-
-
 }

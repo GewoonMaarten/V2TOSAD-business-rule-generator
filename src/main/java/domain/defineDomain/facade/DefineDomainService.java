@@ -87,7 +87,7 @@ public class DefineDomainService {
         return templateValues;
     }
 
-    private BusinessRule getBusinessRuleFromList(int businessRuleID)
+    public BusinessRule getBusinessRuleFromList(int businessRuleID)
     {
         BusinessRule businessRule = null;
         for(BusinessRule businessRuleLoop : businessRules)

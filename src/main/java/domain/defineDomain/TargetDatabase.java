@@ -4,6 +4,7 @@ import data.definePersistency.facade.DefinePersistencyService;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.WeakHashMap;
 
 public class TargetDatabase {
     private int targetdatabaseid;
@@ -31,7 +32,13 @@ public class TargetDatabase {
         return targetDatabaseType;
     }
 
-    public void setTargetDatabaseType(TargetDatabaseType targetDatabaseType) {
-        this.targetDatabaseType = targetDatabaseType;
+    public HashMap<String, Object> getTargetDatabaseDetails()
+    {
+        HashMap<String, Object> targetDatabaseDetails = new HashMap<String,Object>();
+        targetDatabaseDetails.put("databasetype", targetDatabaseType.getTargetDatabaseTypeName());
+        targetDatabaseDetails.put("username", username);
+        targetDatabaseDetails.put("password", password);
+        targetDatabaseDetails.put("host", url);
+        return targetDatabaseDetails;
     }
 }

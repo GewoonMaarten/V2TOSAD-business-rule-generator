@@ -1,5 +1,6 @@
 package application.generatorController;
 
+import domain.generateDomain.facade.GenerateDomainService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import java.io.IOException;
@@ -12,9 +13,11 @@ public class Generator {
 
     public Generator(){}
 
-    public String generateBusinessRuleById(int businessRuleID) {
+    public String generateTriggerCodeByRuleId(int businessRuleID) {
         int definedBusinessRuleID = DefineDomainService.getInstance().defineBusinessRule(businessRuleID);
-        return this.getTriggerCode(definedBusinessRuleID);
+        String code = this.getTriggerCode(definedBusinessRuleID);
+        saveTriggerCode(code, definedBusinessRuleID);
+        return code;
     }
 
     private String getTriggerCode(int businessRuleID) {
@@ -30,5 +33,10 @@ public class Generator {
             e.printStackTrace();
         }
         return sw.toString();
+    }
+
+    private void saveTriggerCode(String code, int businessRuleID)
+    {
+        GenerateDomainService.getInstance().saveTrigger(code, businessRuleID);
     }
 }

@@ -23,7 +23,7 @@ public class RESTService {
             JSONArray jArray = jObject.getJSONArray("businessrules");
 
             for(int i = 0; i < jArray.length(); i++){
-                output += generator.generateBusinessRuleById(Integer.parseInt(Integer.toString((Integer)jArray.get(i))));
+                output += generator.generateTriggerCodeByRuleId(Integer.parseInt(Integer.toString((Integer)jArray.get(i))));
             }
         } catch (JSONException e) {
             e.printStackTrace();
