@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args){
         Generator generator = new Generator();
+        generator.generateBusinessRuleById(1);
         TriggerDAO test = new TriggerDAO();
         HashMap<String, String> testmap = new HashMap<String, String>();
         testmap.put("host", "jdbc:oracle:thin:@ondora02.hu.nl:8521/cursus02.hu.nl");

@@ -30,7 +30,7 @@ public class ConnectionFactory {
     private Connection createConnection(String host, String username, String password, String databaseType)
     {
         Connection connection = null;
-        String DRIVER_CLASS;
+        String DRIVER_CLASS="";
 
         try {
             if (databaseType.equals("MYSQL")) {
@@ -40,7 +40,7 @@ public class ConnectionFactory {
             } else if (databaseType.equals("POSTGRESQL")) {
                 DRIVER_CLASS = "org.postgresql.Driver";
             }
-            Class.forName(this.DRIVER_CLASS);
+            Class.forName(DRIVER_CLASS);
             connection = DriverManager.getConnection(host, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
