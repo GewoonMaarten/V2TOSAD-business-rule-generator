@@ -23,9 +23,8 @@ public class GeneratePersistencyService {
 
     public String getParentTemplate(int targetDatabaseTypeID) {
         ParentTemplateDAO parentTemplateDAO = new ParentTemplateDAO();
-        //TODO recheck conformance with database!
         HashMap<String, Object> parentTemplateDetails = parentTemplateDAO.getParentTemplateDetails(targetDatabaseTypeID);
-        return (String) parentTemplateDetails.get("code");
+        return (String) parentTemplateDetails.get("templateparentcode");
 
     }
 }

@@ -25,8 +25,7 @@ public class ParentTemplateDAO extends BaseDAO {
         try
         {
             statement = connection.createStatement();
-            //TODO recheck conformance with database!
-            String query = "SELECT * FROM PARENTTEMPLATE WHERE TARGETDATABASETYPEID = " + targetDatabaseTypeID;
+            String query = "SELECT * FROM TEMPLATEPARENT WHERE TARGETDATABASETYPEID = " + targetDatabaseTypeID;
             hashMap = this.selectOneRecord(statement, query);
         }
         catch (SQLException e)

@@ -10,10 +10,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
-
+@Path("/businessrule")
 public class RESTService {
     @GET
-    @Path("/generatebusinessrule")
+    @Path("/generate")
     @Consumes("application/json")
     public Response generateBusinessRule(String JSONArray) {
         JSONObject jOutput = new JSONObject();
@@ -36,7 +36,7 @@ public class RESTService {
     }
 
     @GET
-    @Path("/executetrigger")
+    @Path("/execute")
     @Consumes("application/json")
     public Response executeTriggerCode(String JSONArray) {
         String output = "";
@@ -51,7 +51,6 @@ public class RESTService {
                 String trigger = generator.generateTriggerCodeByRuleId((Integer)jArray.get(i));
                 generatedTriggers.add(trigger);
             }
-            //TODO recheck conformance with APEX
             output = generator.generateParentTrigger((Integer)jArray.get(0), jObject.getString("table"),generatedTriggers);
         } catch (JSONException e) {
             e.printStackTrace();

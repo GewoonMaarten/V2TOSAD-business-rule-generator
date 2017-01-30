@@ -63,6 +63,7 @@ public class Generator {
         String businessRuleName = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
         String applicationName = "";
         String[] splitString = businessRuleName.split("_");
+        //TODO input is ["table"] parse that into proper name (name_table)
 
         for(int i = 0; i < 3; i++)
         {
