@@ -1,5 +1,6 @@
 package application.generatorController;
 
+import domain.generateDomain.facade.GenerateDomainService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +49,7 @@ public class RESTService {
             JSONArray jArray = jObject.getJSONArray("businessrules");
 
             for(int i = 0; i < jArray.length(); i++){
-                String trigger = generator.generateTriggerCodeByRuleId((Integer)jArray.get(i));
+                String trigger = GenerateDomainService.getInstance().getGeneratedTrigger((Integer)jArray.get(i));
                 generatedTriggers.add(trigger);
             }
             output = generator.generateParentTrigger((Integer)jArray.get(0), jObject.getString("table"),generatedTriggers);

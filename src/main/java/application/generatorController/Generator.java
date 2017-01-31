@@ -16,14 +16,12 @@ public class Generator {
     public Generator(){}
 
     public String generateTriggerCodeByRuleId(int businessRuleID) {
-        int definedBusinessRuleID = DefineDomainService.getInstance().defineBusinessRule(businessRuleID);
-
+        DefineDomainService.getInstance().defineBusinessRule(businessRuleID);
         String templateCode = DefineDomainService.getInstance().getTriggerTemplateCode(businessRuleID);
         String name = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
         HashMap<String,Object> variables = DefineDomainService.getInstance().getTemplateVariables(businessRuleID);
 
         String code = this.getTriggerCode(templateCode, name, variables);
-        //executeTriggerCode(code, definedBusinessRuleID);
         return code;
     }
 
@@ -63,7 +61,7 @@ public class Generator {
         String businessRuleName = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
         String applicationName = "";
         String[] splitString = businessRuleName.split("_");
-        //TODO input is ["table"] parse that into proper name (name_table)
+        table = table.split("\"")[1];
 
         for(int i = 0; i < 3; i++)
         {
