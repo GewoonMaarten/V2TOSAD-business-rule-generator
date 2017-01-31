@@ -19,6 +19,7 @@ public class TriggerDAO extends BaseDAO {
 
         try {
             statement = connection.createStatement();
+            triggerCode = triggerCode.replaceAll("\r\n", " ");
             statement.execute(triggerCode);
         } catch (SQLException e) {
             e.printStackTrace();

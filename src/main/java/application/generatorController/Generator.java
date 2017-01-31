@@ -64,7 +64,8 @@ public class Generator {
         table = table.split("\"")[1];
 
         for (int i = 0; i < 3; i++) {
-            applicationName += splitString[i] = "_";
+            applicationName += splitString[i];
+            applicationName  += "_";
         }
 
         HashMap<String, Object> variables = new HashMap<String, Object>();
