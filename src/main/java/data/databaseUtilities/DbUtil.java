@@ -18,7 +18,7 @@ public class DbUtil {
             try {
                 connection.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                DatabaseErrorLogger.getInstance().addError(e.getMessage());
             }
         }
     }
@@ -28,7 +28,7 @@ public class DbUtil {
             try {
                 statement.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                DatabaseErrorLogger.getInstance().addError(e.getMessage());
             }
         }
     }
@@ -38,7 +38,7 @@ public class DbUtil {
             try {
                 resultSet.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                DatabaseErrorLogger.getInstance().addError(e.getMessage());
             }
         }
     }

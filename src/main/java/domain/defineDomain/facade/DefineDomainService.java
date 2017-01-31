@@ -1,5 +1,6 @@
 package domain.defineDomain.facade;
 
+import data.databaseUtilities.DatabaseErrorLogger;
 import data.definePersistency.facade.DefinePersistencyService;
 import domain.defineDomain.BusinessRule;
 import domain.defineDomain.BusinessRuleBuilder;
@@ -25,9 +26,14 @@ public class DefineDomainService {
         return instance;
     }
 
-    public int defineBusinessRule(int businessRuleID) {
+    public int defineBusinessRule(int businessRuleID) throws Exception {
         BusinessRuleBuilder businessRuleBuilder = new BusinessRuleBuilder();
-        BusinessRule businessRule = businessRuleBuilder.defineBusinessRule(businessRuleID);
+        BusinessRule businessRule;
+        try {
+            businessRule = businessRuleBuilder.defineBusinessRule(businessRuleID);
+        } catch (Exception e) {
+            throw new Exception("Businessrule not found" + DatabaseErrorLogger.getInstance().getErrors());
+        }
         businessRules.add(businessRule);
         return businessRule.getId();
     }
@@ -37,11 +43,15 @@ public class DefineDomainService {
         return businessRule.getName();
     }
 
-    public String getTriggerTemplateCode(int businessRuleID) {
-        BusinessRule businessRule = this.getBusinessRuleFromList(businessRuleID);
-        HashMap<String, Object> details = DefinePersistencyService.getInstance().getTemplateDetails(businessRule.getRuleType().getId(), businessRule.getTargetDatabase().getTargetDatabaseType().getId());
-        TriggerTemplate triggerTemplate = new TriggerTemplate(((BigDecimal) details.get("templateid")).intValue(), businessRule.getRuleType(), businessRule.getTargetDatabase().getTargetDatabaseType(), (String) details.get("templatecode"));
-        return triggerTemplate.getCode();
+    public String getTriggerTemplateCode(int businessRuleID) throws Exception {
+        try {
+            BusinessRule businessRule = this.getBusinessRuleFromList(businessRuleID);
+            HashMap<String, Object> details = DefinePersistencyService.getInstance().getTemplateDetails(businessRule.getRuleType().getId(), businessRule.getTargetDatabase().getTargetDatabaseType().getId());
+            TriggerTemplate triggerTemplate = new TriggerTemplate(((BigDecimal) details.get("templateid")).intValue(), businessRule.getRuleType(), businessRule.getTargetDatabase().getTargetDatabaseType(), (String) details.get("templatecode"));
+            return triggerTemplate.getCode();
+        } catch (NullPointerException e) {
+            throw new Exception("No code template found" + DatabaseErrorLogger.getInstance().getErrors());
+        }
     }
 
     public HashMap<String, Object> getTemplateVariables(int businessRuleID) {
@@ -76,6 +86,8 @@ public class DefineDomainService {
 
         return templateValues;
     }
+
+
 
     public BusinessRule getBusinessRuleFromList(int businessRuleID) {
         BusinessRule businessRule = null;

@@ -16,7 +16,7 @@ public class DefinePersistencyService {
         return instance;
     }
 
-    public HashMap<String, Object> getBusinessRuleDetails(int businessRuleID) {
+    public HashMap<String, Object> getBusinessRuleDetails(int businessRuleID){
         BusinessRuleDAO businessRuleDAO = new BusinessRuleDAO();
         return businessRuleDAO.getBusinessRuleDetails(businessRuleID);
     }

@@ -1,7 +1,9 @@
 package data.definePersistency.dao;
 
+import application.generatorController.Generator;
 import data.databaseUtilities.BaseDAO;
 import data.databaseUtilities.ConnectionFactory;
+import data.databaseUtilities.DatabaseErrorLogger;
 import data.databaseUtilities.DbUtil;
 
 import java.sql.Connection;
@@ -18,7 +20,7 @@ public class BusinessRuleDAO extends BaseDAO {
         hashMap = new HashMap<String, Object>();
     }
 
-    public HashMap<String, Object> getBusinessRuleDetails(int businessRuleID) {
+    public HashMap<String, Object> getBusinessRuleDetails(int businessRuleID){
         connection = ConnectionFactory.getConnection();
         try {
             statement = connection.createStatement();
@@ -27,6 +29,7 @@ public class BusinessRuleDAO extends BaseDAO {
             hashMap = this.selectOneRecord(statement, query);
         } catch (SQLException e) {
             e.printStackTrace();
+            DatabaseErrorLogger.getInstance().addError(e.getMessage());
         } finally {
             DbUtil.close(statement);
             DbUtil.close(connection);

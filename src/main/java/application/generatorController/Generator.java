@@ -5,6 +5,7 @@ import domain.generateDomain.facade.GenerateDomainService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -13,28 +14,32 @@ import java.util.HashMap;
 
 public class Generator {
 
+
     public Generator() {
     }
 
-    public String generateTriggerCodeByRuleId(int businessRuleID) {
+    public String generateTriggerCodeByRuleId(int businessRuleID) throws Exception {
         DefineDomainService.getInstance().defineBusinessRule(businessRuleID);
         String templateCode = DefineDomainService.getInstance().getTriggerTemplateCode(businessRuleID);
         String name = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
         HashMap<String, Object> variables = DefineDomainService.getInstance().getTemplateVariables(businessRuleID);
 
         String code = this.getTriggerCode(templateCode, name, variables);
+
         return code;
     }
 
-    private String getTriggerCode(String triggerTemplateCode, String name, HashMap<String, Object> variables) {
+    private String getTriggerCode(String triggerTemplateCode, String name, HashMap<String, Object> variables) throws Exception {
         StringWriter sw = new StringWriter();
         try {
             Template freeMarkerTemplate = new Template(name, new StringReader(triggerTemplateCode), StringReplaceConf.getInstance().getCfg());
             freeMarkerTemplate.process(variables, sw);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new Exception("Internal server error while generating code, check with your server administrator");
         } catch (TemplateException e) {
             e.printStackTrace();
+            throw new Exception("Internal server error while generating code, check with your server administrator");
         }
         return sw.toString();
     }
@@ -56,7 +61,7 @@ public class Generator {
 */
 
 
-    public String generateParentTrigger(int businessRuleID, String table, ArrayList<String> generatedTriggers) {
+    public String generateParentTrigger(int businessRuleID, String table, ArrayList<String> generatedTriggers) throws Exception {
         String parentTemplate = GenerateDomainService.getInstance().getParentTemplate(businessRuleID);
         String businessRuleName = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
         String applicationName = "";

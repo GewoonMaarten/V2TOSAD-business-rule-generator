@@ -14,15 +14,20 @@ public class GenerateDomainService {
         return instance;
     }
 
-    public String getGeneratedTrigger(int businessRuleID) {
+    public String getGeneratedTrigger(int businessRuleID) throws Exception {
         DefineDomainService.getInstance().defineBusinessRule(businessRuleID);
         String triggerCode = DefineDomainService.getInstance().getBusinessRuleFromList(businessRuleID).getGeneratedTrigger();
         return triggerCode;
     }
 
-    public void executeTriggerCode(String code, int businessRuleID) {
-        Trigger trigger = new Trigger(code, DefineDomainService.getInstance().getBusinessRuleFromList(businessRuleID).getTargetDatabase());
-        GeneratePersistencyService.getInstance().executeTrigger(trigger.getCode(), trigger.getTargetDatabase().getTargetDatabaseDetails());
+    public void executeTriggerCode(String code, int businessRuleID) throws Exception {
+        try {
+            Trigger trigger = new Trigger(code, DefineDomainService.getInstance().getBusinessRuleFromList(businessRuleID).getTargetDatabase());
+            GeneratePersistencyService.getInstance().executeTrigger(trigger.getCode(), trigger.getTargetDatabase().getTargetDatabaseDetails());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            throw new Exception("Cannot execute trigger");
+        }
     }
 
 

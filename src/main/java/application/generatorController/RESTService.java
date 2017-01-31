@@ -1,6 +1,5 @@
 package application.generatorController;
 
-import domain.generateDomain.facade.GenerateDomainService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +16,8 @@ public class RESTService {
     @Path("/generate")
     @Consumes("application/json")
     public Response generateBusinessRule(String JSONArray) {
-        JSONObject jOutput = new JSONObject();
+        JSONObject jOutputItem = new JSONObject();
+        JSONArray jOutputArray = new JSONArray();
         Generator generator = new Generator();
 
         try {
@@ -26,13 +26,17 @@ public class RESTService {
 
             for (int i = 0; i < jArray.length(); i++) {
                 String trigger = generator.generateTriggerCodeByRuleId((Integer) jArray.get(i));
-                jOutput.put(Integer.toString((Integer) jArray.get(i)), trigger);
+                jOutputItem.put("id", jArray.get(i));
+                jOutputItem.put("code", trigger);
             }
+            jOutputArray.put(jOutputItem);
         } catch (JSONException e) {
-            e.printStackTrace();
+            return Response.status(500).entity("Incorrect input").build();
+        } catch (Exception e) {
+            String output = e.getMessage();
+            return Response.status(500).entity(output).build();
         }
-
-        return Response.status(200).entity(jOutput.toString()).build();
+        return Response.status(200).entity(jOutputArray.toString()).build();
     }
 
     @GET
@@ -54,6 +58,8 @@ public class RESTService {
             }
             output = generator.generateParentTrigger((Integer) jArray.get(0), jObject.getString("table"), generatedTriggers);
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return Response.status(200).entity(output).build();

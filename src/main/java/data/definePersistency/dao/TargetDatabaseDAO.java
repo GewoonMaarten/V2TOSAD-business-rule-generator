@@ -2,6 +2,7 @@ package data.definePersistency.dao;
 
 import data.databaseUtilities.BaseDAO;
 import data.databaseUtilities.ConnectionFactory;
+import data.databaseUtilities.DatabaseErrorLogger;
 import data.databaseUtilities.DbUtil;
 
 import java.sql.Connection;
@@ -27,7 +28,7 @@ public class TargetDatabaseDAO extends BaseDAO {
                     "TARGETDATABASE.TARGETDATABASEID WHERE TARGETDATABASEID = " + targetDatabaseID;
             hashMap = this.selectOneRecord(statement, query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            DatabaseErrorLogger.getInstance().addError(e.getMessage());
         } finally {
             DbUtil.close(statement);
             DbUtil.close(connection);

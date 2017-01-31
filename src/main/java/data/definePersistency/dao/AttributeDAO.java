@@ -2,6 +2,7 @@ package data.definePersistency.dao;
 
 import data.databaseUtilities.BaseDAO;
 import data.databaseUtilities.ConnectionFactory;
+import data.databaseUtilities.DatabaseErrorLogger;
 import data.databaseUtilities.DbUtil;
 
 import java.sql.Connection;
@@ -29,6 +30,7 @@ public class AttributeDAO extends BaseDAO {
             hashMap = this.selectAllRecords(statement, query);
         } catch (SQLException e) {
             e.printStackTrace();
+            DatabaseErrorLogger.getInstance().addError(e.getMessage());
         } finally {
             DbUtil.close(statement);
             DbUtil.close(connection);

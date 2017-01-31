@@ -26,8 +26,10 @@ public class ConnectionFactory {
             connection = DriverManager.getConnection(databaseConfig.getHost(), databaseConfig.getUsername(), databaseConfig.getPassword());
         } catch (SQLException e) {
             e.printStackTrace();
+            DatabaseErrorLogger.getInstance().addError("Cannot connect to database");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            DatabaseErrorLogger.getInstance().addError("Driver not installed");
         }
 
         return connection;

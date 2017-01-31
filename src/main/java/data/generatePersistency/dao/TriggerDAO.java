@@ -1,9 +1,6 @@
 package data.generatePersistency.dao;
 
-import data.databaseUtilities.BaseDAO;
-import data.databaseUtilities.ConnectionFactory;
-import data.databaseUtilities.DatabaseConfig;
-import data.databaseUtilities.DbUtil;
+import data.databaseUtilities.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,13 +13,12 @@ public class TriggerDAO extends BaseDAO {
 
     public void executeTrigger(String triggerCode, DatabaseConfig targetDatabaseDetails) {
         connection = ConnectionFactory.getConnection(targetDatabaseDetails);
-
         try {
             statement = connection.createStatement();
             triggerCode = triggerCode.replaceAll("\r\n", " ");
             statement.execute(triggerCode);
         } catch (SQLException e) {
-            e.printStackTrace();
+            DatabaseErrorLogger.getInstance().addError(e.getMessage());
         } finally {
             DbUtil.close(statement);
             DbUtil.close(connection);
