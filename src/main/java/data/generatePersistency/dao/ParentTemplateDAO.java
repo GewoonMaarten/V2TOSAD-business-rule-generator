@@ -1,8 +1,8 @@
 package data.generatePersistency.dao;
 
 import data.BaseDAO;
+import data.ConnectionFactory;
 import data.DbUtil;
-import data.definePersistency.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,26 +14,19 @@ public class ParentTemplateDAO extends BaseDAO {
     private Statement statement;
     private HashMap<String, Object> hashMap;
 
-    public ParentTemplateDAO()
-    {
+    public ParentTemplateDAO() {
         hashMap = new HashMap<String, Object>();
     }
 
-    public HashMap<String, Object> getParentTemplateDetails(int targetDatabaseTypeID)
-    {
+    public HashMap<String, Object> getParentTemplateDetails(int targetDatabaseTypeID) {
         connection = ConnectionFactory.getConnection();
-        try
-        {
+        try {
             statement = connection.createStatement();
             String query = "SELECT * FROM TEMPLATEPARENT WHERE TARGETDATABASETYPEID = " + targetDatabaseTypeID;
             hashMap = this.selectOneRecord(statement, query);
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             DbUtil.close(statement);
             DbUtil.close(connection);
         }

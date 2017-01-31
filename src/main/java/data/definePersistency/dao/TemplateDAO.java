@@ -1,40 +1,32 @@
 package data.definePersistency.dao;
 
 import data.BaseDAO;
+import data.ConnectionFactory;
 import data.DbUtil;
-import data.definePersistency.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
-public class TemplateDAO extends BaseDAO
-{
+public class TemplateDAO extends BaseDAO {
     private Connection connection;
     private Statement statement;
     private HashMap<String, Object> hashMap;
 
-    public TemplateDAO()
-    {
+    public TemplateDAO() {
         hashMap = new HashMap<String, Object>();
     }
 
-    public HashMap<String, Object> getTemplateDetails(int businessRuleTypeID, int targetDatabaseTypeID)
-    {
+    public HashMap<String, Object> getTemplateDetails(int businessRuleTypeID, int targetDatabaseTypeID) {
         connection = ConnectionFactory.getConnection();
-        try
-        {
+        try {
             statement = connection.createStatement();
             String query = "SELECT * FROM TEMPLATE WHERE BUSINESSRULETYPEID = " + businessRuleTypeID + " AND TARGETDATABASETYPEID = " + targetDatabaseTypeID;
             hashMap = this.selectOneRecord(statement, query);
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             DbUtil.close(statement);
             DbUtil.close(connection);
         }

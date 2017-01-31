@@ -20,14 +20,13 @@ public class RESTService {
         JSONObject jOutput = new JSONObject();
         Generator generator = new Generator();
 
-        try
-        {
+        try {
             JSONObject jObject = new JSONObject(JSONArray);
             JSONArray jArray = jObject.getJSONArray("businessrules");
 
-            for(int i = 0; i < jArray.length(); i++){
-                String trigger = generator.generateTriggerCodeByRuleId((Integer)jArray.get(i));
-                jOutput.put(Integer.toString((Integer)jArray.get(i)), trigger);
+            for (int i = 0; i < jArray.length(); i++) {
+                String trigger = generator.generateTriggerCodeByRuleId((Integer) jArray.get(i));
+                jOutput.put(Integer.toString((Integer) jArray.get(i)), trigger);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -48,11 +47,11 @@ public class RESTService {
             JSONObject jObject = new JSONObject(JSONArray);
             JSONArray jArray = jObject.getJSONArray("businessrules");
 
-            for(int i = 0; i < jArray.length(); i++){
-                String trigger = GenerateDomainService.getInstance().getGeneratedTrigger((Integer)jArray.get(i));
+            for (int i = 0; i < jArray.length(); i++) {
+                String trigger = GenerateDomainService.getInstance().getGeneratedTrigger((Integer) jArray.get(i));
                 generatedTriggers.add(trigger);
             }
-            output = generator.generateParentTrigger((Integer)jArray.get(0), jObject.getString("table"),generatedTriggers);
+            output = generator.generateParentTrigger((Integer) jArray.get(0), jObject.getString("table"), generatedTriggers);
         } catch (JSONException e) {
             e.printStackTrace();
         }

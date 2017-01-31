@@ -1,7 +1,5 @@
 package domain.defineDomain;
 
-import java.util.HashMap;
-
 public class Attribute {
     private int targetattributeid;
     private String name;

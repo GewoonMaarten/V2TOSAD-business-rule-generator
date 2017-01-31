@@ -1,5 +1,6 @@
 package data.generatePersistency.facade;
 
+import data.DatabaseConfig;
 import data.generatePersistency.dao.ParentTemplateDAO;
 import data.generatePersistency.dao.TriggerDAO;
 
@@ -9,7 +10,7 @@ public class GeneratePersistencyService {
     private static GeneratePersistencyService instance = null;
 
     public static GeneratePersistencyService getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new GeneratePersistencyService();
         }
         return instance;
@@ -18,7 +19,11 @@ public class GeneratePersistencyService {
 
     public void executeTrigger(String triggerCode, HashMap<String, Object> targetDatabase) {
         TriggerDAO triggerDAO = new TriggerDAO();
-        triggerDAO.executeTrigger(triggerCode, targetDatabase);
+        triggerDAO.executeTrigger(triggerCode,
+                new DatabaseConfig((String) targetDatabase.get("host"),
+                        (String) targetDatabase.get("username"),
+                        (String) targetDatabase.get("password"),
+                        (String) targetDatabase.get("databasetype")));
     }
 
     public String getParentTemplate(int targetDatabaseTypeID) {

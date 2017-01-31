@@ -1,11 +1,11 @@
 package application.generatorController;
 
+import domain.defineDomain.facade.DefineDomainService;
 import domain.generateDomain.facade.GenerateDomainService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import java.io.IOException;
-import domain.defineDomain.facade.DefineDomainService;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -13,13 +13,14 @@ import java.util.HashMap;
 
 public class Generator {
 
-    public Generator(){}
+    public Generator() {
+    }
 
     public String generateTriggerCodeByRuleId(int businessRuleID) {
         DefineDomainService.getInstance().defineBusinessRule(businessRuleID);
         String templateCode = DefineDomainService.getInstance().getTriggerTemplateCode(businessRuleID);
         String name = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
-        HashMap<String,Object> variables = DefineDomainService.getInstance().getTemplateVariables(businessRuleID);
+        HashMap<String, Object> variables = DefineDomainService.getInstance().getTemplateVariables(businessRuleID);
 
         String code = this.getTriggerCode(templateCode, name, variables);
         return code;
@@ -55,7 +56,6 @@ public class Generator {
 */
 
 
-
     public String generateParentTrigger(int businessRuleID, String table, ArrayList<String> generatedTriggers) {
         String parentTemplate = GenerateDomainService.getInstance().getParentTemplate(businessRuleID);
         String businessRuleName = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
@@ -63,8 +63,7 @@ public class Generator {
         String[] splitString = businessRuleName.split("_");
         table = table.split("\"")[1];
 
-        for(int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             applicationName += splitString[i] = "_";
         }
 
