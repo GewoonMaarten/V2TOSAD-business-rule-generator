@@ -28,8 +28,7 @@ public class BusinessRule {
         return generatedTrigger;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
@@ -45,8 +44,7 @@ public class BusinessRule {
         return attributes;
     }
 
-    public Attribute getAttribute(int index)
-    {
+    public Attribute getAttribute(int index) {
         return attributes.get(index);
     }
 
@@ -54,8 +52,7 @@ public class BusinessRule {
         return values;
     }
 
-    public String getValue(int index)
-    {
+    public String getValue(int index) {
         return values.get(index);
     }
 
@@ -63,7 +60,7 @@ public class BusinessRule {
         return error;
     }
 
-    public void setGeneratedTrigger(String generatedTrigger){
+    public void setGeneratedTrigger(String generatedTrigger) {
         this.generatedTrigger = generatedTrigger;
     }
 
@@ -75,23 +72,19 @@ public class BusinessRule {
         this.ruleType = ruleType;
     }
 
-    public void addAtributes(ArrayList<HashMap<String, Object>> attributes)
-    {
-        for(HashMap<String, Object> attributeDetails: attributes)
-        {
-            if(attributeDetails.get("targetattributeid") != null) {
+    public void addAtributes(ArrayList<HashMap<String, Object>> attributes) {
+        for (HashMap<String, Object> attributeDetails : attributes) {
+            if (attributeDetails.get("targetattributeid") != null) {
                 this.attributes.add(new Attribute(((BigDecimal) attributeDetails.get("targetattributeid")).intValue(),
                         (String) attributeDetails.get("name"), (String) attributeDetails.get("type")));
             }
         }
     }
 
-    public void addValues(ArrayList<HashMap<String, Object>> values)
-    {
-        for(HashMap<String, Object> attributeDetails: values)
-        {
-            if(attributeDetails.get("value") != null) {
-                this.values.add((String)attributeDetails.get("value"));
+    public void addValues(ArrayList<HashMap<String, Object>> values) {
+        for (HashMap<String, Object> attributeDetails : values) {
+            if (attributeDetails.get("value") != null) {
+                this.values.add((String) attributeDetails.get("value"));
             }
         }
     }

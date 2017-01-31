@@ -16,17 +16,19 @@ public class StringReplaceConf {
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
             cfg.setLogTemplateExceptions(false);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static StringReplaceConf getInstance(){
-        if(instance == null){
+    public static StringReplaceConf getInstance() {
+        if (instance == null) {
             instance = new StringReplaceConf();
         }
         return instance;
     }
 
-    public Configuration getCfg(){return cfg;}
+    public Configuration getCfg() {
+        return cfg;
+    }
 }

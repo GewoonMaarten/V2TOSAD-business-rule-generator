@@ -1,4 +1,4 @@
-package data.definePersistency.dao;
+package data.generatePersistency.dao;
 
 import data.databaseUtilities.BaseDAO;
 import data.databaseUtilities.ConnectionFactory;
@@ -9,20 +9,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
-public class TemplateDAO extends BaseDAO {
+public class ParentTemplateDAO extends BaseDAO {
     private Connection connection;
     private Statement statement;
     private HashMap<String, Object> hashMap;
 
-    public TemplateDAO() {
+    public ParentTemplateDAO() {
         hashMap = new HashMap<String, Object>();
     }
 
-    public HashMap<String, Object> getTemplateDetails(int businessRuleTypeID, int targetDatabaseTypeID) {
+    public HashMap<String, Object> getParentTemplateDetails(int targetDatabaseTypeID) {
         connection = ConnectionFactory.getConnection();
         try {
             statement = connection.createStatement();
-            String query = "SELECT * FROM TEMPLATE WHERE BUSINESSRULETYPEID = " + businessRuleTypeID + " AND TARGETDATABASETYPEID = " + targetDatabaseTypeID;
+            String query = "SELECT * FROM TEMPLATEPARENT WHERE TARGETDATABASETYPEID = " + targetDatabaseTypeID;
             hashMap = this.selectOneRecord(statement, query);
         } catch (SQLException e) {
             e.printStackTrace();

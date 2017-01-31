@@ -1,25 +1,25 @@
 package data.generatePersistency.dao;
 
-import data.BaseDAO;
-import data.DbUtil;
-import data.generatePersistency.ConnectionFactory;
+import data.databaseUtilities.BaseDAO;
+import data.databaseUtilities.ConnectionFactory;
+import data.databaseUtilities.DatabaseConfig;
+import data.databaseUtilities.DbUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 
-public class TriggerDAO  extends BaseDAO{
+public class TriggerDAO extends BaseDAO {
 
     private Connection connection;
     private Statement statement;
 
-    public void saveTrigger(String triggerCode, HashMap<String, Object> targetDatabaseDetails)
-    {
+    public void executeTrigger(String triggerCode, DatabaseConfig targetDatabaseDetails) {
         connection = ConnectionFactory.getConnection(targetDatabaseDetails);
 
         try {
             statement = connection.createStatement();
+            triggerCode = triggerCode.replaceAll("\r\n", " ");
             statement.execute(triggerCode);
         } catch (SQLException e) {
             e.printStackTrace();
