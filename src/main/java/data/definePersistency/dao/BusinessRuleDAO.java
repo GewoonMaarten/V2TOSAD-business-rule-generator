@@ -1,8 +1,8 @@
 package data.definePersistency.dao;
 
-import data.BaseDAO;
-import data.ConnectionFactory;
-import data.DbUtil;
+import data.databaseUtilities.BaseDAO;
+import data.databaseUtilities.ConnectionFactory;
+import data.databaseUtilities.DbUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;

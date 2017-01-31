@@ -1,9 +1,9 @@
 package data.generatePersistency.dao;
 
-import data.BaseDAO;
-import data.ConnectionFactory;
-import data.DatabaseConfig;
-import data.DbUtil;
+import data.databaseUtilities.BaseDAO;
+import data.databaseUtilities.ConnectionFactory;
+import data.databaseUtilities.DatabaseConfig;
+import data.databaseUtilities.DbUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;

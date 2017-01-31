@@ -1,6 +1,6 @@
 package data.generatePersistency.facade;
 
-import data.DatabaseConfig;
+import data.databaseUtilities.DatabaseConfig;
 import data.generatePersistency.dao.ParentTemplateDAO;
 import data.generatePersistency.dao.TriggerDAO;
 
