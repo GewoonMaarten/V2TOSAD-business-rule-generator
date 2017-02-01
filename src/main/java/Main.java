@@ -8,7 +8,7 @@ public class Main {
             Generator generator = new Generator();
             ArrayList<String> code = new ArrayList<String>();
             code.add(generator.generateTriggerCodeByRuleId(70));
-            generator.generateParentTrigger(70,"thing", code);
+            generator.generateParentTrigger(70, code);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

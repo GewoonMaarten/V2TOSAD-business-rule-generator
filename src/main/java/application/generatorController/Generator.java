@@ -61,12 +61,11 @@ public class Generator {
 */
 
 
-    public String generateParentTrigger(int businessRuleID, String table, ArrayList<String> generatedTriggers) throws Exception {
+    public String generateParentTrigger(int businessRuleID, ArrayList<String> generatedTriggers) throws Exception {
         String parentTemplate = GenerateDomainService.getInstance().getParentTemplate(businessRuleID);
         String businessRuleName = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
         String applicationName = "";
         String[] splitString = businessRuleName.split("_");
-        //table = table.split("\"")[1];
 
         for (int i = 0; i < 3; i++) {
             applicationName += splitString[i];
@@ -75,7 +74,7 @@ public class Generator {
 
         HashMap<String, Object> variables = new HashMap<String, Object>();
         variables.put("name", applicationName);
-        variables.put("table", DefineDomainService.getInstance().getBusinessRuleFromList(businessRuleID).getAttribute(0).getTable());
+        variables.put("table", DefineDomainService.getInstance().getTableName(businessRuleID));
         variables.put("generatedTriggers", generatedTriggers);
 
         String code = this.getTriggerCode(parentTemplate, applicationName, variables);

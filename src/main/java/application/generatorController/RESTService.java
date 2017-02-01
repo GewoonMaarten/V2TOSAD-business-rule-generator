@@ -37,6 +37,7 @@ public class RESTService {
     public Response generateBusinessRule(String JSONArray) {
         System.setOut(new CustomPrintStream(System.out));
         System.out.println("Generate call with: \n" + JSONArray.toString());
+        JSONObject jOutput = new JSONObject();
         JSONObject jOutputItem = new JSONObject();
         JSONArray jOutputArray = new JSONArray();
         Generator generator = new Generator();
@@ -49,21 +50,22 @@ public class RESTService {
                 String trigger = generator.generateTriggerCodeByRuleId((Integer) jArray.get(i));
                 jOutputItem.put("id", jArray.get(i));
                 jOutputItem.put("code", trigger);
-                jOutputArray.put(jOutputItem);
+                jOutputArray.put(new JSONObject(jOutputItem.toString()));
             }
+            jOutput.put("output", jOutputArray);
         } catch (JSONException e) {
             return getJSONErrorMessage("Incorrect input");
         } catch (Exception e) {
             return getJSONErrorMessage(e.getMessage());
         }
-        System.out.println("Generated output: \n" + jOutputArray.toString());
-        return Response.status(200).entity(jOutputArray.toString()).build();
+
+        System.out.println("Generated output: \n" + jOutput.toString());
+        return Response.status(200).entity(jOutput.toString()).build();
     }
 
     private Response getJSONErrorMessage(String value) {
         try {
             JSONObject jOutputItem = new JSONObject();
-            JSONArray jOutputArray = new JSONArray();
             jOutputItem.put("error", "true");
             jOutputItem.put("message", value);
             String output = jOutputItem.toString();
@@ -79,7 +81,7 @@ public class RESTService {
     @Path("/execute")
     @Consumes("application/json")
     public Response executeTriggerCode(String JSONArray) {
-        String output;
+        JSONObject jOutput = new JSONObject();
         System.out.println("Execute call with: \n" + JSONArray.toString());
         Generator generator = new Generator();
         ArrayList<String> generatedTriggers = new ArrayList<String>();
@@ -94,14 +96,14 @@ public class RESTService {
                 String trigger = generator.generateTriggerCodeByRuleId((Integer)jArray.get(i));
                 generatedTriggers.add(trigger);
             }
-            output = generator.generateParentTrigger((Integer) jArray.get(0), jObject.getString("table"), generatedTriggers);
+            jOutput.put("output", generator.generateParentTrigger((Integer) jArray.get(0), generatedTriggers));
         } catch (JSONException e) {
             return getJSONErrorMessage("Incorrect input");
         } catch (Exception e) {
             return getJSONErrorMessage(e.getMessage());
         }
-        System.out.println("Executed with output:\n" + output);
-        return Response.status(200).entity(output).build();
+        System.out.println("Executed with output:\n" + jOutput.toString());
+        return Response.status(200).entity(jOutput.toString()).build();
     }
 
 }

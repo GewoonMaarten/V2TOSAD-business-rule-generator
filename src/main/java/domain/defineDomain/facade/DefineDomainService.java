@@ -115,4 +115,8 @@ public class DefineDomainService {
         }
         return businessRule;
     }
+
+    public String getTableName(int businessRuleID) {
+        return getBusinessRuleFromList(businessRuleID).getAttribute(0).getTable();
+    }
 }

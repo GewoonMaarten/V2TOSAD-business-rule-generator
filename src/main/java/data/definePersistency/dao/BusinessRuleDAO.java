@@ -1,6 +1,5 @@
 package data.definePersistency.dao;
 
-import application.generatorController.Generator;
 import data.databaseUtilities.BaseDAO;
 import data.databaseUtilities.ConnectionFactory;
 import data.databaseUtilities.DatabaseErrorLogger;
