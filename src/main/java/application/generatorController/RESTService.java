@@ -8,7 +8,26 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.security.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+class  CustomPrintStream extends PrintStream{
+    public CustomPrintStream(OutputStream out) {
+        super(out);
+    }
+
+    @Override
+    public void println(String x) {
+        super.println("[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-M-dd HH:mm:ss")) + "]" + x);
+    }
+    //override  print  methods here
+}
+
+
 
 @Path("/businessrule")
 public class RESTService {
@@ -16,6 +35,7 @@ public class RESTService {
     @Path("/generate")
     @Consumes("application/json")
     public Response generateBusinessRule(String JSONArray) {
+        System.setOut(new CustomPrintStream(System.out));
         System.out.println("Generate call with: \n" + JSONArray.toString());
         JSONObject jOutputItem = new JSONObject();
         JSONArray jOutputArray = new JSONArray();
