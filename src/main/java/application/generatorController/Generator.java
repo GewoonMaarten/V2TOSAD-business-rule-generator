@@ -66,7 +66,7 @@ public class Generator {
         String businessRuleName = DefineDomainService.getInstance().getBusinessRuleName(businessRuleID);
         String applicationName = "";
         String[] splitString = businessRuleName.split("_");
-        table = table.split("\"")[1];
+        //table = table.split("\"")[1];
 
         for (int i = 0; i < 3; i++) {
             applicationName += splitString[i];
@@ -75,7 +75,7 @@ public class Generator {
 
         HashMap<String, Object> variables = new HashMap<String, Object>();
         variables.put("name", applicationName);
-        variables.put("table", table);
+        variables.put("table", DefineDomainService.getInstance().getBusinessRuleFromList(businessRuleID).getAttribute(0).getTable());
         variables.put("generatedTriggers", generatedTriggers);
 
         String code = this.getTriggerCode(parentTemplate, applicationName, variables);

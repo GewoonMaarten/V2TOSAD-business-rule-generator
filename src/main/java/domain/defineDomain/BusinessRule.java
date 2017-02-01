@@ -76,7 +76,7 @@ public class BusinessRule {
         for (HashMap<String, Object> attributeDetails : attributes) {
             if (attributeDetails.get("targetattributeid") != null) {
                 this.attributes.add(new Attribute(((BigDecimal) attributeDetails.get("targetattributeid")).intValue(),
-                        (String) attributeDetails.get("name"), (String) attributeDetails.get("type")));
+                        (String) attributeDetails.get("name"), (String) attributeDetails.get("type"), (String) attributeDetails.get("tablename")));
             }
         }
     }

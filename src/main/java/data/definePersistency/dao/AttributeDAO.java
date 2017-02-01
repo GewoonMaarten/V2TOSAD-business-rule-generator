@@ -24,9 +24,20 @@ public class AttributeDAO extends BaseDAO {
         connection = ConnectionFactory.getConnection();
         try {
             statement = connection.createStatement();
-            String query = "SELECT * FROM BUSINESSRULEVALUE LEFT OUTER JOIN TARGETATTRIBUTE ON " +
-                    "TARGETATTRIBUTE.TARGETATTRIBUTEID = BUSINESSRULEVALUE.TARGETATTRIBUTEID WHERE " +
-                    "BUSINESSRULEVALUE.BUSINESSRULEID = " + businessRuleID + "ORDER BY BUSINESSRULEVALUE.POSITION ASC";
+            String query = "SELECT BUSINESSRULEVALUE.BUSINESSRULEID BUSINESSRULEID, " +
+                    "BUSINESSRULEVALUE.TARGETATTRIBUTEID TARGETATTRIBUTEID, " +
+                    "BUSINESSRULEVALUE.VALUE VALUE, " +
+                    "BUSINESSRULEVALUE.POSITION POSITION, " +
+                    "BUSINESSRULEVALUE.BUSINESSRULEVALUEID BUSINESSRULEVALUEID, " +
+                    "TARGETATTRIBUTE.TARGETATTRIBUTEID TARGETATTRIBUTEID_0, " +
+                    "TARGETATTRIBUTE.NAME NAME, " +
+                    "TARGETATTRIBUTE.TYPE TYPE, " +
+                    "TARGETATTRIBUTE.TARGETTABLEID TARGETTABLEID, " +
+                    "Targettable.TARGETTABLEID TARGETTABLEID_1, " +
+                    "Targettable.NAME tablename, " +
+                    "Targettable.TARGETDATABASEID TARGETDATABASEID FROM BUSINESSRULEVALUE LEFT OUTER JOIN TARGETATTRIBUTE ON TARGETATTRIBUTE.TARGETATTRIBUTEID = BUSINESSRULEVALUE.TARGETATTRIBUTEID " +
+                    "LEFT OUTER JOIN Targettable on TARGETATTRIBUTE.TARGETTABLEID = Targettable.TARGETTABLEID " +
+                    "WHERE BUSINESSRULEVALUE.BUSINESSRULEID = " + businessRuleID + " ORDER BY BUSINESSRULEVALUE.POSITION ASC";
             hashMap = this.selectAllRecords(statement, query);
         } catch (SQLException e) {
             e.printStackTrace();

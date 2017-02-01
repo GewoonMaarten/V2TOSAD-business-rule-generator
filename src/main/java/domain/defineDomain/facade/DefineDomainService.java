@@ -72,11 +72,13 @@ public class DefineDomainService {
         BusinessRule businessRule = this.getBusinessRuleFromList(businessRuleID);
         HashMap<String, Object> templateValues = new HashMap<String, Object>();
         templateValues.put("businessRuleName", businessRule.getName());
+        templateValues.put("error" , businessRule.getError());
         templateValues.put("operator", businessRule.getOperator());
 
         int rowCounter = 0;
         while (rowCounter < businessRule.getAttributes().size()) {
             templateValues.put("attribute" + Integer.toString(rowCounter + 1), businessRule.getAttribute(rowCounter).getName());
+            templateValues.put("table" + Integer.toString(rowCounter + 1), businessRule.getAttribute(rowCounter).getTable());
             rowCounter += 1;
         }
 
