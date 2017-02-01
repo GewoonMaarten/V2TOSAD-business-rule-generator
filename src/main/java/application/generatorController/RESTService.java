@@ -16,6 +16,7 @@ public class RESTService {
     @Path("/generate")
     @Consumes("application/json")
     public Response generateBusinessRule(String JSONArray) {
+        System.out.println("Generate call with: \n" + JSONArray.toString());
         JSONObject jOutputItem = new JSONObject();
         JSONArray jOutputArray = new JSONArray();
         Generator generator = new Generator();
@@ -28,14 +29,15 @@ public class RESTService {
                 String trigger = generator.generateTriggerCodeByRuleId((Integer) jArray.get(i));
                 jOutputItem.put("id", jArray.get(i));
                 jOutputItem.put("code", trigger);
+                jOutputArray.put(jOutputItem);
             }
-            jOutputArray.put(jOutputItem);
         } catch (JSONException e) {
             return Response.status(500).entity("Incorrect input").build();
         } catch (Exception e) {
             String output = e.getMessage();
             return Response.status(500).entity(output).build();
         }
+        System.out.println("Generated output: \n" + jOutputArray.toString());
         return Response.status(200).entity(jOutputArray.toString()).build();
     }
 
@@ -44,6 +46,7 @@ public class RESTService {
     @Consumes("application/json")
     public Response executeTriggerCode(String JSONArray) {
         String output;
+        System.out.println("Execute call with: \n" + JSONArray.toString());
         Generator generator = new Generator();
         ArrayList<String> generatedTriggers = new ArrayList<String>();
 
@@ -63,6 +66,7 @@ public class RESTService {
         } catch (Exception e) {
             return Response.status(500).entity(e.getMessage()).build();
         }
+        System.out.println("Executed with output:\n" + output);
         return Response.status(200).entity(output).build();
     }
 
