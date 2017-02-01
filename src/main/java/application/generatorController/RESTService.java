@@ -10,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.security.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ class  CustomPrintStream extends PrintStream{
 
 @Path("/businessrule")
 public class RESTService {
+
     @GET
     @Path("/generate")
     @Consumes("application/json")
@@ -52,13 +52,27 @@ public class RESTService {
                 jOutputArray.put(jOutputItem);
             }
         } catch (JSONException e) {
-            return Response.status(500).entity("Incorrect input").build();
+            return getJSONErrorMessage("Incorrect input");
         } catch (Exception e) {
-            String output = e.getMessage();
-            return Response.status(500).entity(output).build();
+            return getJSONErrorMessage(e.getMessage());
         }
         System.out.println("Generated output: \n" + jOutputArray.toString());
         return Response.status(200).entity(jOutputArray.toString()).build();
+    }
+
+    private Response getJSONErrorMessage(String value) {
+        try {
+            JSONObject jOutputItem = new JSONObject();
+            JSONArray jOutputArray = new JSONArray();
+            jOutputItem.put("error", "true");
+            jOutputItem.put("message", value);
+            String output = jOutputItem.toString();
+            System.out.println(output);
+            return Response.status(500).entity(output).build();
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
+        return null;
     }
 
     @GET
@@ -82,9 +96,9 @@ public class RESTService {
             }
             output = generator.generateParentTrigger((Integer) jArray.get(0), jObject.getString("table"), generatedTriggers);
         } catch (JSONException e) {
-            return Response.status(500).entity("Incorrect input").build();
+            return getJSONErrorMessage("Incorrect input");
         } catch (Exception e) {
-            return Response.status(500).entity(e.getMessage()).build();
+            return getJSONErrorMessage(e.getMessage());
         }
         System.out.println("Executed with output:\n" + output);
         return Response.status(200).entity(output).build();
