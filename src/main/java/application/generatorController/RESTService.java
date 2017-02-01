@@ -43,7 +43,7 @@ public class RESTService {
     @Path("/execute")
     @Consumes("application/json")
     public Response executeTriggerCode(String JSONArray) {
-        String output = "";
+        String output;
         Generator generator = new Generator();
         ArrayList<String> generatedTriggers = new ArrayList<String>();
 
@@ -52,15 +52,16 @@ public class RESTService {
             JSONArray jArray = jObject.getJSONArray("businessrules");
 
             for (int i = 0; i < jArray.length(); i++) {
+                //Replace the code with this piece of code if you want to let the user change trigger code in APEX
                 //String trigger = GenerateDomainService.getInstance().getGeneratedTrigger((Integer) jArray.get(i));
                 String trigger = generator.generateTriggerCodeByRuleId((Integer)jArray.get(i));
                 generatedTriggers.add(trigger);
             }
             output = generator.generateParentTrigger((Integer) jArray.get(0), jObject.getString("table"), generatedTriggers);
         } catch (JSONException e) {
-            e.printStackTrace();
+            return Response.status(500).entity("Incorrect input").build();
         } catch (Exception e) {
-            e.printStackTrace();
+            return Response.status(500).entity(e.getMessage()).build();
         }
         return Response.status(200).entity(output).build();
     }

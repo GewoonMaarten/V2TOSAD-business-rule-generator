@@ -34,12 +34,26 @@ public class DefineDomainService {
         } catch (Exception e) {
             throw new Exception("Businessrule not found" + DatabaseErrorLogger.getInstance().getErrors());
         }
-        businessRules.add(businessRule);
+        addBusinessrule(businessRule);
         return businessRule.getId();
     }
 
-    public String getBusinessRuleName(int businessRuleID) {
-        BusinessRule businessRule = this.getBusinessRuleFromList(businessRuleID);
+    private void addBusinessrule(BusinessRule businessRule) {
+        BusinessRule ruleFromList = getBusinessRuleFromList(businessRule.getId());
+        if(ruleFromList != null) {
+            businessRules.set(businessRules.indexOf(ruleFromList),businessRule);
+        } else {
+            businessRules.add(businessRule);
+        }
+    }
+
+    public String getBusinessRuleName(int businessRuleID) throws Exception {
+        BusinessRule businessRule;
+        try {
+            businessRule = this.getBusinessRuleFromList(businessRuleID);
+        } catch(NullPointerException e) {
+            throw new Exception("Businessrule has not been generated yet");
+        }
         return businessRule.getName();
     }
 

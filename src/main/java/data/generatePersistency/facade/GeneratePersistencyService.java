@@ -17,7 +17,7 @@ public class GeneratePersistencyService {
     }
 
 
-    public void executeTrigger(String triggerCode, HashMap<String, Object> targetDatabase) {
+    public void executeTrigger(String triggerCode, HashMap<String, Object> targetDatabase) throws Exception {
         TriggerDAO triggerDAO = new TriggerDAO();
         triggerDAO.executeTrigger(triggerCode,
                 new DatabaseConfig((String) targetDatabase.get("host"),
