@@ -21,7 +21,7 @@ class  CustomPrintStream extends PrintStream{
 
     @Override
     public void println(String x) {
-        super.println("[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-M-dd HH:mm:ss")) + "]" + x);
+        super.println("[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-M-dd HH:mm:ss")) + "] " + x);
     }
     //override  print  methods here
 }
@@ -35,6 +35,7 @@ public class RESTService {
     @Path("/generate")
     @Consumes("application/json")
     public Response generateBusinessRule(String JSONArray) {
+        //TODO add type to JSON response
         System.setOut(new CustomPrintStream(System.out));
         System.out.println("Generate call with: \n" + JSONArray.toString());
         JSONObject jOutput = new JSONObject();
@@ -52,6 +53,7 @@ public class RESTService {
                 jOutputItem.put("code", trigger);
                 jOutputArray.put(new JSONObject(jOutputItem.toString()));
             }
+            jOutput.put("type", "output");
             jOutput.put("output", jOutputArray);
         } catch (JSONException e) {
             return getJSONErrorMessage("Incorrect input");
@@ -66,7 +68,7 @@ public class RESTService {
     private Response getJSONErrorMessage(String value) {
         try {
             JSONObject jOutputItem = new JSONObject();
-            jOutputItem.put("error", "true");
+            jOutputItem.put("type", "error");
             jOutputItem.put("message", value);
             String output = jOutputItem.toString();
             System.out.println(output);
@@ -96,6 +98,7 @@ public class RESTService {
                 String trigger = generator.generateTriggerCodeByRuleId((Integer)jArray.get(i));
                 generatedTriggers.add(trigger);
             }
+            jOutput.put("type", "output");
             jOutput.put("output", generator.generateParentTrigger((Integer) jArray.get(0), generatedTriggers));
         } catch (JSONException e) {
             return getJSONErrorMessage("Incorrect input");
