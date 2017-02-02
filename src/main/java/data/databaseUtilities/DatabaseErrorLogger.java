@@ -29,7 +29,9 @@ public class DatabaseErrorLogger {
     }
 
     public String getErrors() {
-        String errors = " caused by:\n";
+        String errors = "";
+        if (!errorList.isEmpty())
+            errors = " caused by:\n";
         for (String s :
                 errorList) {
             errors += s + "\n";

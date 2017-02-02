@@ -31,12 +31,14 @@ class  CustomPrintStream extends PrintStream{
 @Path("/businessrule")
 public class RESTService {
 
+    public RESTService() {
+        System.setOut(new CustomPrintStream(System.out));
+    }
+
     @GET
     @Path("/generate")
     @Consumes("application/json")
     public Response generateBusinessRule(String JSONArray) {
-        //TODO add type to JSON response
-        System.setOut(new CustomPrintStream(System.out));
         System.out.println("Generate call with: \n" + JSONArray.toString());
         JSONObject jOutput = new JSONObject();
         JSONObject jOutputItem = new JSONObject();
@@ -98,7 +100,7 @@ public class RESTService {
                 String trigger = generator.generateTriggerCodeByRuleId((Integer)jArray.get(i));
                 generatedTriggers.add(trigger);
             }
-            jOutput.put("type", "output");
+            jOutput.put("type", "trigger");
             jOutput.put("output", generator.generateParentTrigger((Integer) jArray.get(0), generatedTriggers));
         } catch (JSONException e) {
             return getJSONErrorMessage("Incorrect input");
